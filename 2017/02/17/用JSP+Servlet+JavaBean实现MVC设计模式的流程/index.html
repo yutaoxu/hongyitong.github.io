@@ -1,0 +1,866 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Z1De3vrLeDV0zQkSKDV0IlHnujNBKcoYsS9BdR4JEIg" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="设计模式,MVC,SSH," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="忆桐之家的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="设计模式ServletJSPMVCWeb前端时间学习了 MVC 模式，现在来谈谈自己对MVC的认识：MVC是三个单词的缩写：M，Model（模型）；V,View( 视图 )，C，Control（控制）。MVC模式的目的就是实现Web系统的职能分工，  Model层：实现系统的业务逻辑，即javaBean部分 View层：负责与用户交互，即在界面上展示数据对象给用户，即html，jsp Contro">
+<meta name="keywords" content="设计模式,MVC,SSH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用JSP+Servlet+JavaBean实现MVC设计模式的流程">
+<meta property="og:url" content="http://hongyitong.github.io/2017/02/17/用JSP+Servlet+JavaBean实现MVC设计模式的流程/index.html">
+<meta property="og:site_name" content="忆桐之家的博客">
+<meta property="og:description" content="设计模式ServletJSPMVCWeb前端时间学习了 MVC 模式，现在来谈谈自己对MVC的认识：MVC是三个单词的缩写：M，Model（模型）；V,View( 视图 )，C，Control（控制）。MVC模式的目的就是实现Web系统的职能分工，  Model层：实现系统的业务逻辑，即javaBean部分 View层：负责与用户交互，即在界面上展示数据对象给用户，即html，jsp Contro">
+<meta property="og:updated_time" content="2017-07-12T02:11:25.215Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用JSP+Servlet+JavaBean实现MVC设计模式的流程">
+<meta name="twitter:description" content="设计模式ServletJSPMVCWeb前端时间学习了 MVC 模式，现在来谈谈自己对MVC的认识：MVC是三个单词的缩写：M，Model（模型）；V,View( 视图 )，C，Control（控制）。MVC模式的目的就是实现Web系统的职能分工，  Model层：实现系统的业务逻辑，即javaBean部分 View层：负责与用户交互，即在界面上展示数据对象给用户，即html，jsp Contro">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://hongyitong.github.io/2017/02/17/用JSP+Servlet+JavaBean实现MVC设计模式的流程/"/>
+
+
+
+
+
+  <title>用JSP+Servlet+JavaBean实现MVC设计模式的流程 | 忆桐之家的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">忆桐之家的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rayman&Tony</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2017/02/17/用JSP+Servlet+JavaBean实现MVC设计模式的流程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rayman.hung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/log.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="忆桐之家的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用JSP+Servlet+JavaBean实现MVC设计模式的流程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-17T00:00:00+08:00">
+                2017-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术相关/" itemprop="url" rel="index">
+                    <span itemprop="name">技术相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>设计模式ServletJSPMVCWeb<br>前端时间学习了 MVC 模式，现在来谈谈自己对MVC的认识：<br>MVC是三个单词的缩写：M，Model（模型）；V,View( 视图 )，C，Control（控制）。<br>MVC模式的目的就是实现Web系统的职能分工，</p>
+<ul>
+<li>Model层：实现系统的业务逻辑，即javaBean部分</li>
+<li>View层：负责与用户交互，即在界面上展示数据对象给用户，即html，jsp</li>
+<li>Control层：Model与View之间沟通的桥梁，它可以分派用户的请求并选择恰当的视图以用于显示，同时它也可以解释用户的输入并将它们映射为模型层可执行的操作，当然就是Servlet的职责了 <a id="more"></a></li>
+</ul>
+<p>下面我们用MVC设计模式来实现 简单的用户登录过程</p>
+<h1 id="1、控制器Servlet的实现"><a href="#1、控制器Servlet的实现" class="headerlink" title="1、控制器Servlet的实现"></a>1、控制器Servlet的实现</h1><p>系统中只有一个servlet即ControlServlet,所有页面发起的以”  *.do  “的请求，都被web.xml配置给ControlServlet进行处理，在ControlServlet中根据‘ * ’的字符串(即解析用户请求的路径)，调用ActionFactory生成的制定Action对象，在将处理后的URL转发给用户。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> cn.netjava.servlet;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> java.io.IOException;  </div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;  </div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;  </div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;  </div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> cn.netjava.action.Action;  </div><div class="line"><span class="keyword">import</span> cn.netjava.action.ActionFactory;  </div><div class="line">  </div><div class="line"><span class="comment">/** </span></div><div class="line"> * Servlet implementation class ControlServlet </div><div class="line"> */  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControlServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;  </div><div class="line">        <span class="comment">//得到当前Servlet的请求路径  </span></div><div class="line">        String pathName =request.getServletPath();  </div><div class="line">        <span class="comment">// request.getContextPath();得到项目名字  </span></div><div class="line">        System.out.println(<span class="string">"pathName:"</span>+pathName);  </div><div class="line">        <span class="comment">//得到请求的Action名字  </span></div><div class="line">        <span class="keyword">int</span> index = pathName.indexOf(<span class="string">"."</span>);  </div><div class="line">        String ActionName = pathName.substring(<span class="number">1</span>, index);  </div><div class="line">        System.out.println(ActionName);  </div><div class="line">        <span class="comment">//获取运行时参数  </span></div><div class="line">        String ActionClassName = <span class="keyword">this</span>.getInitParameter(ActionName);  </div><div class="line">        <span class="comment">//得到Action对象  </span></div><div class="line">        Action action = ActionFactory.getActionFactory().getAction(ActionClassName);  </div><div class="line">        <span class="comment">//执行Action的execute得到要返回的URL路径  </span></div><div class="line">        String url = action.execute(request, response);  </div><div class="line">        <span class="keyword">if</span>(url==<span class="keyword">null</span>)&#123;  </div><div class="line">            request.getRequestDispatcher(<span class="string">"error.jsp"</span>).forward(request, response);     </div><div class="line">        &#125;<span class="keyword">else</span>&#123;  </div><div class="line">            request.getRequestDispatcher(url).forward(request, response);  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="2、Action对象工厂类实现："><a href="#2、Action对象工厂类实现：" class="headerlink" title="2、Action对象工厂类实现："></a>2、Action对象工厂类实现：</h1><p>ActionFactory是一个单实例类（整个系统只需要使用其一个对象），它只提供一个Action对象，通过getAction（String ActionClassName） 的方法调用创建一个Action对象。这个方法在Control中被调用。代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> cn.netjava.action;  </div><div class="line"><span class="comment">/** </span></div><div class="line"> * 根据Action名字，创建Action对象 </div><div class="line"> * <span class="doctag">@author</span> Administrator </div><div class="line"> * </div><div class="line"> */  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActionFactory</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="comment">//单例模式：不需要创建对象  </span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ActionFactory</span><span class="params">()</span></span>&#123;  </div><div class="line">    &#125;  </div><div class="line">    <span class="comment">//单实例访问方法，得到ActionFactory对象  </span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ActionFactory <span class="title">getActionFactory</span><span class="params">()</span></span>&#123;  </div><div class="line">        <span class="keyword">if</span>(af == <span class="keyword">null</span>)&#123;  </div><div class="line">            af = <span class="keyword">new</span> ActionFactory();  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">return</span> af;  </div><div class="line">    &#125;  </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 根据具体的Action类名字创建Action对象 </div><div class="line">     * <span class="doctag">@param</span> ActionClassName ：具体的Action类全名 </div><div class="line">     * <span class="doctag">@return</span>：Action类型对象 </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> Action <span class="title">getAction</span><span class="params">(String ActionClassName)</span></span>&#123;  </div><div class="line">        Action action = <span class="keyword">null</span>;  </div><div class="line">        <span class="keyword">try</span>&#123;  </div><div class="line">            action = (Action) Class.forName(ActionClassName).newInstance();  </div><div class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;  </div><div class="line">            e.printStackTrace();  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">return</span> action;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ActionFactory af;  </div><div class="line">      </div><div class="line">      </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="3、Action接口类定义："><a href="#3、Action接口类定义：" class="headerlink" title="3、Action接口类定义："></a>3、Action接口类定义：</h1><p>所有的事件处理（即Action）类都必须实现这个接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> cn.netjava.action;  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Action</span> </span>&#123;  </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 所有的具体Action实现这个接口 </div><div class="line">     * <span class="doctag">@param</span> request 请求对象 </div><div class="line">     * <span class="doctag">@param</span> response 应答对象 </div><div class="line">     * <span class="doctag">@return</span> ：结果页面 </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">(javax.servlet.http.HttpServletRequest request,javax.servlet.http.HttpServletResponse response)</span></span>;  </div><div class="line">      </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="4、web-xml中配置请求发送给控制器Servlet"><a href="#4、web-xml中配置请求发送给控制器Servlet" class="headerlink" title="4、web.xml中配置请求发送给控制器Servlet"></a>4、web.xml中配置请求发送给控制器Servlet</h1><p>最后，我们只需要在wex.xml中对MVC结构的配置：<br>视图页面中的请求都是以&lt;动作名字&gt;.do结尾，当这个请求到达web服务器后，会被服务器转向给控制器处理，控制器在根据解析出的动作名，调用对应的Action对象，处理结果，并输出结果页面，所以web.xml中必须有如下配置：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&lt;servlet&gt;  </div><div class="line">    &lt;servlet-name&gt;controlServlet&lt;/servlet-name&gt;  </div><div class="line">    &lt;servlet-class&gt;cn.netjava.servlet.ControlServlet&lt;/servlet-class&gt;  </div><div class="line">    &lt;init-param&gt;  </div><div class="line">        &lt;param-name&gt;loginAction&lt;/param-name&gt;  </div><div class="line">        &lt;param-value&gt;cn.netjava.action.LoginAction&lt;/param-value&gt;  </div><div class="line">    &lt;/init-param&gt;  </div><div class="line">  &lt;/servlet&gt;  </div><div class="line">  &lt;servlet-mapping&gt;  </div><div class="line">    &lt;servlet-name&gt;controlServlet&lt;/servlet-name&gt;  </div><div class="line">    &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;  </div><div class="line"># 4、具体的Action类实现（即对登录动作进行处理的类）</div><div class="line">``` java</div><div class="line">package cn.netjava.action;  </div><div class="line">  </div><div class="line">import javax.servlet.http.HttpServletRequest;  </div><div class="line">import javax.servlet.http.HttpServletResponse;  </div><div class="line">  </div><div class="line">public class LoginAction implements Action &#123;  </div><div class="line">  </div><div class="line">    public String execute(HttpServletRequest request,  </div><div class="line">            HttpServletResponse response) &#123;  </div><div class="line">        // 得到用户名和密码  </div><div class="line">        String userName = request.getParameter("userName");  </div><div class="line">        String userPwd = request.getParameter("userPwd");  </div><div class="line">        if (userName.equals("netjava") &amp;&amp; userPwd.equals("netjava")) &#123;  </div><div class="line">            request.setAttribute("userName", userName);  </div><div class="line">            return "main.jsp";  </div><div class="line">        &#125; else &#123;  </div><div class="line">            return "login.jsp";  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 如果登录成功，跳转到 main.jsp页面，否则，返回login,jsp页面</p>
+<p>以下是main.jsp和login.jsp页面：<br>main.jsp<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language="java" contentType="text/html; charset=utf-8"  </div><div class="line">    pageEncoding="utf-8"%&gt;  </div><div class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;  </div><div class="line">&lt;html&gt;  </div><div class="line">&lt;head&gt;  </div><div class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;  </div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;  </div><div class="line">&lt;/head&gt;  </div><div class="line">&lt;body&gt;  </div><div class="line">&lt;h1 style="color:red"&gt;&lt;%=request.getAttribute("userName") %&gt;登录成功&lt;/h1&gt;  </div><div class="line">&lt;/body&gt;  </div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p> login.jsp</p>
+<pre><code class="java">&lt;%@ page language="java" contentType="text/html; charset=utf-8"  
+    pageEncoding="utf-8"%&gt;  
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;  
+&lt;html&gt;  
+&lt;head&gt;  
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;  
+&lt;title&gt;用户登录&lt;/title&gt;  
+&lt;/head&gt;  
+&lt;body&gt;  
+&lt;form action="loginAction.do" method="post"&gt;  
+    用户名：&lt;input type="text" name="userName" id="userName"&gt;&lt;br&gt;  
+    密码：&lt;input type="password" name="userPwd" id="userPwd"&gt;&lt;br&gt;  
+    &lt;input type="submit" value="登录"/&gt;  
+&lt;/form&gt;  
+&lt;/body&gt;  
+&lt;/html&gt;
+</code></pre>
+<p> 最后做个总结吧：以前我们与服务器进行交互，可能jsp页面和servlet中都将html和java代码参杂在一起，这会导致系统的系统维护困难、分工不清；例如在加有jsp代码段的网页中，程序员与美工之间的配合就非常困难！MVC结构的系统会从根本上强制我们将web系统中的数据对象、业务逻辑、用户界面三者分离，使得程序员（Java开发人员）集中精力于业务逻辑，界面程序员（HTML和JSP开发人员）集中精力于表现形式上。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+            <a href="/tags/MVC/" rel="tag"># MVC</a>
+          
+            <a href="/tags/SSH/" rel="tag"># SSH</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/17/4+1视图分析/" rel="next" title="4+1视图分析">
+                <i class="fa fa-chevron-left"></i> 4+1视图分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/17/Facade外观模式/" rel="prev" title="Facade外观模式">
+                Facade外观模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/log.jpg"
+               alt="Rayman.hung" />
+          <p class="site-author-name" itemprop="name">Rayman.hung</p>
+           
+              <p class="site-description motion-element" itemprop="description">技术分享、读书心得、亲子时刻</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">654</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">441</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hongyitong" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.sina.com.cn/yitonghong" target="_blank" title="忆桐之家">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  忆桐之家
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/2780741" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/rayman-36" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.liaoxuefeng.com/" target="_blank" title="廖雪峰的官方网站">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  廖雪峰的官方网站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.vaikan.com/" target="_blank" title="外刊IT评论">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  外刊IT评论
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.google.com/" title="Google" target="_blank">Google</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hupu.com/" title="Hupu" target="_blank">Hupu</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、控制器Servlet的实现"><span class="nav-number">1.</span> <span class="nav-text">1、控制器Servlet的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、Action对象工厂类实现："><span class="nav-number">2.</span> <span class="nav-text">2、Action对象工厂类实现：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、Action接口类定义："><span class="nav-number">3.</span> <span class="nav-text">3、Action接口类定义：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、web-xml中配置请求发送给控制器Servlet"><span class="nav-number">4.</span> <span class="nav-text">4、web.xml中配置请求发送给控制器Servlet</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2007 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rayman.hung</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

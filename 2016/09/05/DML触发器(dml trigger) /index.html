@@ -1,0 +1,840 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Z1De3vrLeDV0zQkSKDV0IlHnujNBKcoYsS9BdR4JEIg" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据库," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="忆桐之家的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Oracle DML触发器实现功能：很多时候我们或者客户有如下需求：在A.B表上添加触发器.触发事件：UPDATE,DELETE,INSERT 后触发；对表的每一行触发器执行一次；记录用户名，操作类型，操作时间，修改或删除前的数据，新增的数据。">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DML触发器(dml trigger)">
+<meta property="og:url" content="http://hongyitong.github.io/2016/09/05/DML触发器(dml trigger) /index.html">
+<meta property="og:site_name" content="忆桐之家的博客">
+<meta property="og:description" content="Oracle DML触发器实现功能：很多时候我们或者客户有如下需求：在A.B表上添加触发器.触发事件：UPDATE,DELETE,INSERT 后触发；对表的每一行触发器执行一次；记录用户名，操作类型，操作时间，修改或删除前的数据，新增的数据。">
+<meta property="og:updated_time" content="2017-07-12T06:04:05.386Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DML触发器(dml trigger)">
+<meta name="twitter:description" content="Oracle DML触发器实现功能：很多时候我们或者客户有如下需求：在A.B表上添加触发器.触发事件：UPDATE,DELETE,INSERT 后触发；对表的每一行触发器执行一次；记录用户名，操作类型，操作时间，修改或删除前的数据，新增的数据。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://hongyitong.github.io/2016/09/05/DML触发器(dml trigger) /"/>
+
+
+
+
+
+  <title>DML触发器(dml trigger) | 忆桐之家的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">忆桐之家的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rayman&Tony</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/09/05/DML触发器(dml trigger) /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rayman.hung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/log.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="忆桐之家的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DML触发器(dml trigger)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-05T00:00:00+08:00">
+                2016-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术相关/" itemprop="url" rel="index">
+                    <span itemprop="name">技术相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>Oracle DML触发器实现功能：</strong><br>很多时候我们或者客户有如下需求：<br>在A.B表上添加触发器.<br>触发事件：UPDATE,DELETE,INSERT 后触发；对表的每一行触发器执行一次；记录用户名，操作类型，操作时间，修改或删除前的数据，新增的数据。<a id="more"></a><br>/<em><br>①、确认该表没有失效的触发器以及没有已经存在重复的日志表名<br>②、创建对应表的触发器日志表，并添加 记录用户名，操作类型，操作时间等列<br>③、修改trigger里对日志表插入的内容创建trigger<br>④、查看触发器状态，使其enable<br>⑤、测试触发器是否可用或者报错
+</em>/</p>
+<h2 id="1、创建日志表并增加审计列"><a href="#1、创建日志表并增加审计列" class="headerlink" title="1、创建日志表并增加审计列"></a>1、创建日志表并增加审计列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> TEST.TEST1_LOG</div><div class="line"><span class="keyword">AS</span></div><div class="line">   <span class="keyword">SELECT</span> *</div><div class="line">     <span class="keyword">FROM</span> TEST.TEST1</div><div class="line">    <span class="keyword">WHERE</span> <span class="number">1</span> = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> TEST.TEST1_LOG</div><div class="line">   <span class="keyword">ADD</span> t_operator VARCHAR2 (<span class="number">100</span>);</div><div class="line"></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> TEST.TEST1_LOG</div><div class="line">   <span class="keyword">ADD</span> t_action VARCHAR2 (<span class="number">100</span>);</div><div class="line"></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> TEST.TEST1_LOG</div><div class="line">   <span class="keyword">ADD</span> t_date <span class="built_in">date</span>;</div><div class="line"></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> TEST.TEST1_LOG</div><div class="line">   <span class="keyword">ADD</span> t_remark VARCHAR2 (<span class="number">100</span>);</div></pre></td></tr></table></figure>
+<h2 id="2、创建触发器"><a href="#2、创建触发器" class="headerlink" title="2、创建触发器"></a>2、创建触发器</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">TRIGGER</span> TEST.TRG_TEST1</div></pre></td></tr></table></figure>
+<p>《《《《《注意这里最好提起查是否有之前的重复trigger名，避免误replace<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">AFTER <span class="keyword">INSERT</span> <span class="keyword">OR</span> <span class="keyword">DELETE</span> <span class="keyword">OR</span> <span class="keyword">UPDATE</span></div><div class="line">   <span class="keyword">ON</span> TEST.TEST1</div><div class="line">   <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span></div><div class="line"><span class="keyword">DECLARE</span></div><div class="line">   v_havenew   <span class="built_in">BOOLEAN</span> := <span class="literal">FALSE</span>;</div><div class="line">   v_haveold   BOOLEAN := FALSE;</div><div class="line">   v_action    VARCHAR2 (32);</div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">   <span class="keyword">IF</span> INSERTING </div><div class="line">   <span class="keyword">THEN</span></div><div class="line">      v_havenew := <span class="literal">TRUE</span>;</div><div class="line">      v_action := '<span class="keyword">INSERT</span><span class="string">';</span></div><div class="line">   END IF;</div><div class="line"></div><div class="line">   IF UPDATING</div><div class="line">   THEN</div><div class="line">      v_havenew := TRUE;</div><div class="line">      v_action := '<span class="keyword">UPDATE</span><span class="string">';</span></div><div class="line">      v_haveold := TRUE;</div><div class="line">   END IF;</div><div class="line"></div><div class="line">   IF DELETING</div><div class="line">   THEN</div><div class="line">      v_action := '<span class="keyword">DELETE</span><span class="string">';</span></div><div class="line">      v_haveold := TRUE;</div><div class="line">   END IF;</div><div class="line"></div><div class="line">   IF TRUE = v_haveold</div><div class="line">   THEN</div><div class="line">      INSERT INTO TEST.TEST1_LOG (id,      </div><div class="line">      -----/*注意这里insert日志表的列要参照日志的列补充上，我这里的测试表只有id一个列*/</div><div class="line">                                         t_operator,</div><div class="line">                                         t_action,</div><div class="line">                                         t_date,</div><div class="line">                                         t_remark)</div><div class="line">           VALUES (:old.id,</div><div class="line">                   USER,</div><div class="line">                   v_action,</div><div class="line">                   SYSDATE,</div><div class="line">                   '<span class="keyword">old</span><span class="string">');</span></div><div class="line">   END IF;</div><div class="line"></div><div class="line">   IF TRUE = v_havenew</div><div class="line">   THEN</div><div class="line">      INSERT INTO TEST.TEST1_LOG (id, </div><div class="line">      -----/*注意这里insert日志表的列要参照日志的列补充上，我这里的测试表只有id一个列*/</div><div class="line">                                         t_operator,</div><div class="line">                                         t_action,</div><div class="line">                                         t_date,</div><div class="line">                                         t_remark)</div><div class="line">           VALUES ( :new.id,</div><div class="line">                   USER,</div><div class="line">                   v_action,</div><div class="line">                   SYSDATE,</div><div class="line">                   '<span class="keyword">new</span><span class="string">');</span></div><div class="line">   END IF;</div><div class="line">EXCEPTION</div><div class="line">   WHEN OTHERS</div><div class="line">   THEN</div><div class="line">      NULL;</div><div class="line">END TRG_TEST1;</div></pre></td></tr></table></figure></p>
+<h2 id="3、创建完成后查看trigger状态："><a href="#3、创建完成后查看trigger状态：" class="headerlink" title="3、创建完成后查看trigger状态："></a>3、创建完成后查看trigger状态：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> trigger_name, <span class="keyword">status</span> <span class="keyword">from</span> dba_triggers <span class="keyword">where</span> owner = <span class="string">'TEST'</span> <span class="keyword">and</span> trigger_name = <span class="string">'TRG_TEST1'</span>; </div><div class="line">TRIGGER_NA STATUS</div><div class="line"><span class="comment">---------- ------------------------</span></div><div class="line">TRG_TEST1  ENABLED</div></pre></td></tr></table></figure>
+<p>《《《《《《enable  如果不是enable手工enable如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TRIGGER</span> <span class="string">"TEST"</span>.<span class="string">"TRG_TEST1"</span> <span class="keyword">ENABLE</span>;</div></pre></td></tr></table></figure></p>
+<h2 id="4、增删改测试"><a href="#4、增删改测试" class="headerlink" title="4、增删改测试"></a>4、增删改测试</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">SQL&gt; update TEST.test1 set id=5 where id=2;</div><div class="line">1 row updated.</div><div class="line">SQL&gt; commit;</div><div class="line">Commit complete.</div><div class="line">---------------------------------------------------------</div><div class="line">SQL&gt; delete from TEST.test1 where id=8;</div><div class="line">1 row deleted.</div><div class="line">SQL&gt; commit;</div><div class="line">Commit complete.</div><div class="line">-----------------------------------------------------</div><div class="line">SQL&gt;  insert into TEST.test1 values(10);</div><div class="line">1 row created.</div><div class="line">SQL&gt; commit;</div><div class="line">Commit complete.</div></pre></td></tr></table></figure>
+<h2 id="5、查看日志表对应是否有记录。"><a href="#5、查看日志表对应是否有记录。" class="headerlink" title="5、查看日志表对应是否有记录。"></a>5、查看日志表对应是否有记录。</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  TEST.TEST1_LOG <span class="keyword">order</span> <span class="keyword">by</span> t_date <span class="keyword">desc</span>;</div></pre></td></tr></table></figure>
+<p>转自：<a href="http://blog.itpub.net/31043804/viewspace-2119546/" target="_blank" rel="external">http://blog.itpub.net/31043804/viewspace-2119546/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/05/分析的前提—数据质量/" rel="next" title="分析的前提—数据质量">
+                <i class="fa fa-chevron-left"></i> 分析的前提—数据质量
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/05/Oracle中表空间、段、区、块及方案详解/" rel="prev" title="Oracle中表空间、段、区、块及方案详解">
+                Oracle中表空间、段、区、块及方案详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/log.jpg"
+               alt="Rayman.hung" />
+          <p class="site-author-name" itemprop="name">Rayman.hung</p>
+           
+              <p class="site-description motion-element" itemprop="description">技术分享、读书心得、亲子时刻</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">654</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">441</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hongyitong" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.sina.com.cn/yitonghong" target="_blank" title="忆桐之家">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  忆桐之家
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/2780741" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/rayman-36" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.liaoxuefeng.com/" target="_blank" title="廖雪峰的官方网站">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  廖雪峰的官方网站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.vaikan.com/" target="_blank" title="外刊IT评论">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  外刊IT评论
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.google.com/" title="Google" target="_blank">Google</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hupu.com/" title="Hupu" target="_blank">Hupu</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、创建日志表并增加审计列"><span class="nav-number">1.</span> <span class="nav-text">1、创建日志表并增加审计列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、创建触发器"><span class="nav-number">2.</span> <span class="nav-text">2、创建触发器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、创建完成后查看trigger状态："><span class="nav-number">3.</span> <span class="nav-text">3、创建完成后查看trigger状态：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、增删改测试"><span class="nav-number">4.</span> <span class="nav-text">4、增删改测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、查看日志表对应是否有记录。"><span class="nav-number">5.</span> <span class="nav-text">5、查看日志表对应是否有记录。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2007 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rayman.hung</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

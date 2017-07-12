@@ -1,0 +1,849 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="Z1De3vrLeDV0zQkSKDV0IlHnujNBKcoYsS9BdR4JEIg" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="忆桐之家的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="序言最近学习java，接触到了回调机制(CallBack)。初识时感觉比较混乱，而且在网上搜索到的相关的讲解，要么一言带过，要么说的比较单纯的像是给CallBack做了一个定义。当然了，我在理解了回调之后，再去看网上的各种讲解，确实没什么问题。但是，对于初学的我来说，缺了一个循序渐进的过程。此处，将我对回调机制的个人理解，按照由浅到深的顺序描述一下，如有不妥之处，望不吝赐教！开始之前，先想象一个场">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA回调机制(CallBack)详解">
+<meta property="og:url" content="http://hongyitong.github.io/2016/11/01/JAVA回调机制(CallBack)详解/index.html">
+<meta property="og:site_name" content="忆桐之家的博客">
+<meta property="og:description" content="序言最近学习java，接触到了回调机制(CallBack)。初识时感觉比较混乱，而且在网上搜索到的相关的讲解，要么一言带过，要么说的比较单纯的像是给CallBack做了一个定义。当然了，我在理解了回调之后，再去看网上的各种讲解，确实没什么问题。但是，对于初学的我来说，缺了一个循序渐进的过程。此处，将我对回调机制的个人理解，按照由浅到深的顺序描述一下，如有不妥之处，望不吝赐教！开始之前，先想象一个场">
+<meta property="og:updated_time" content="2017-07-12T06:44:34.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA回调机制(CallBack)详解">
+<meta name="twitter:description" content="序言最近学习java，接触到了回调机制(CallBack)。初识时感觉比较混乱，而且在网上搜索到的相关的讲解，要么一言带过，要么说的比较单纯的像是给CallBack做了一个定义。当然了，我在理解了回调之后，再去看网上的各种讲解，确实没什么问题。但是，对于初学的我来说，缺了一个循序渐进的过程。此处，将我对回调机制的个人理解，按照由浅到深的顺序描述一下，如有不妥之处，望不吝赐教！开始之前，先想象一个场">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://hongyitong.github.io/2016/11/01/JAVA回调机制(CallBack)详解/"/>
+
+
+
+
+
+  <title>JAVA回调机制(CallBack)详解 | 忆桐之家的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">忆桐之家的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rayman&Tony</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/11/01/JAVA回调机制(CallBack)详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rayman.hung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/log.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="忆桐之家的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JAVA回调机制(CallBack)详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-01T14:32:00+08:00">
+                2016-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术相关/" itemprop="url" rel="index">
+                    <span itemprop="name">技术相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>最近学习java，接触到了回调机制(CallBack)。初识时感觉比较混乱，而且在网上搜索到的相关的讲解，要么一言带过，要么说的比较单纯的像是给CallBack做了一个定义。当然了，我在理解了回调之后，再去看网上的各种讲解，确实没什么问题。但是，对于初学的我来说，缺了一个循序渐进的过程。此处，将我对回调机制的个人理解，按照由浅到深的顺序描述一下，如有不妥之处，望不吝赐教！<br>开始之前，先想象一个场景：幼稚园的小朋友刚刚学习了10以内的加法。<br><a id="more"></a></p>
+<h2 id="第1章-故事的缘起"><a href="#第1章-故事的缘起" class="headerlink" title="第1章. 故事的缘起"></a>第1章. 故事的缘起</h2><p>幼师在黑板上写一个式子 “1 + 1 = ”，由小明同学来填空。<br>由于已经学习了10以内的加法，小明同学可以完全靠自己来计算这个题目，模拟该过程的代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> String name = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">calcADD</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> a + b;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillBlank</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> result = calcADD(a, b);</div><div class="line">        System.out.println(name + <span class="string">"心算:"</span> + a + <span class="string">" + "</span> + b + <span class="string">" = "</span> + result);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>小明同学在填空(fillBalnk)的时候，直接心算(clacADD)了一下，得出结果是2，并将结果写在空格里。测试代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">&#123;</div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">     &#123;</div><div class="line">         <span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line">         <span class="keyword">int</span> b = <span class="number">1</span>;</div><div class="line">         Student s = <span class="keyword">new</span> Student(<span class="string">"小明"</span>);</div><div class="line">         s.fillBlank(a, b);</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如下：<br>小明心算:1 + 1 = 2<br>该过程完全由Student类的实例对象单独完成，并未涉及回调机制。</p>
+<h2 id="第2章-幼师的找茬"><a href="#第2章-幼师的找茬" class="headerlink" title="第2章. 幼师的找茬"></a>第2章. 幼师的找茬</h2><p>课间，幼师突发奇想在黑板上写了“168 + 291 = ”让小明完成，然后回办公室了。<br>花擦！为什么所有老师都跟小明过不去啊？明明超纲了好不好！这时候小明同学明显不能再像上面那样靠心算来完成了，正在懵逼的时候，班上的小红同学递过来一个只能计算加法的计算器（奸商啊）！！！！而小明同学恰好知道怎么用计算器，于是通过计算器计算得到结果并完成了填空。<br>计算器的代码为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Calculator</span></span></div><div class="line">&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> a + b;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>修改Student类，添加使用计算器的方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span></span></div><div class="line"> &#123;</div><div class="line">    <span class="keyword">private</span> String name = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name)</span></span></div><div class="line">     &#123;</div><div class="line">         <span class="comment">// TODO Auto-generated constructor stub</span></div><div class="line">         <span class="keyword">this</span>.name = name;</div><div class="line">     &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unused"</span>)</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">calcADD</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> a + b;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">useCalculator</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Calculator().add(a, b);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillBlank</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> result = useCalculator(a, b);</div><div class="line">        System.out.println(name + <span class="string">"使用计算器:"</span> + a + <span class="string">" + "</span> + b + <span class="string">" = "</span> + result);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">&#123;</div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">     &#123;</div><div class="line">         <span class="keyword">int</span> a = <span class="number">168</span>;</div><div class="line">         <span class="keyword">int</span> b = <span class="number">291</span>;</div><div class="line">         Student s = <span class="keyword">new</span> Student(<span class="string">"小明"</span>);</div><div class="line">        s.fillBlank(a, b);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如下：<br>小明使用计算器:168 + 291 = 459<br>该过程中仍未涉及到回调机制，但是部分小明的部分工作已经实现了转移，由计算器来协助实现。</p>
+<h3 id="3-幼师回来了"><a href="#3-幼师回来了" class="headerlink" title="3. 幼师回来了"></a>3. 幼师回来了</h3><p>发现小明完成了3位数的加法，老师觉得小明很聪明，是个可塑之才。于是又在黑板上写下了“26549 + 16487 = ”，让小明上课之前完成填空，然后又回办公室了。<br>小明看着教室外面撒欢儿的小伙伴，不禁悲从中来。再不出去玩，这个课间就要废了啊！！！！ 看着小红再一次递上来的计算器，小明心生一计：让小红代劳。<br>小明告诉小红题目是“26549 + 16487 = ”，然后指出填写结果的具体位置，然后就出去快乐的玩耍了。<br>这里，不把小红单独实现出来，而是把这个只能算加法的计算器和小红看成一个整体，一个会算结果还会填空的超级计算器。这个超级计算器需要传的参数是两个加数和要填空的位置，而这些内容需要小明提前告知，也就是小明要把自己的一部分方法暴漏给小红，最简单的方法就是把自己的引用和两个加数一块告诉小红。<br>因此，超级计算器的add方法应该包含两个操作数和小明自身的引用，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuperCalculator</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, Student  xiaoming)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> result = a + b;</div><div class="line">        xiaoming.fillBlank(a, b, result);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>小明这边现在已经不需要心算，也不需要使用计算器了，因此只需要有一个方法可以向小红寻求帮助就行了，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span></span></div><div class="line"> &#123;</div><div class="line">     <span class="keyword">private</span> String name = <span class="keyword">null</span>;</div><div class="line"> </div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name)</span></span></div><div class="line">     &#123;</div><div class="line">         <span class="comment">// TODO Auto-generated constructor stub</span></div><div class="line">         <span class="keyword">this</span>.name = name;</div><div class="line">     &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">callHelp</span> <span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">new</span> SuperCalculator().add(a, b, <span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillBlank</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> result)</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(name + <span class="string">"求助小红计算:"</span> + a + <span class="string">" + "</span> + b + <span class="string">" = "</span> + result);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">&#123;</div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">   &#123;</div><div class="line">        <span class="keyword">int</span> a = <span class="number">26549</span>;</div><div class="line">         <span class="keyword">int</span> b = <span class="number">16487</span>;</div><div class="line">        Student s = <span class="keyword">new</span> Student(<span class="string">"小明"</span>);</div><div class="line">        s.callHelp(a, b);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果为：<br>小明求助小红计算:26549 + 16487 = 43036<br>执行流程为：小明通过自身的callHelp方法调用了小红（new SuperCalculator()）的add方法，在调用的时候将自身的引用（this）当做参数一并传入，小红在使用计算器得出结果之后，回调了小明的fillBlank方法，将结果填在了黑板上的空格里。<br>灯灯灯！到这里，回调功能就正式登场了，小明的fillBlank方法就是我们常说的回调函数。<br>通过这种方式，可以很明显的看出，对于完成老师的填空题这个任务上，小明已经不需要等待到加法做完且结果填写在黑板上才能去跟小伙伴们撒欢了，填空这个工作由超级计算器小红来做了。回调的优势已经开始体现了。</p>
+<h2 id="第4章-门口的婆婆"><a href="#第4章-门口的婆婆" class="headerlink" title="第4章. 门口的婆婆"></a>第4章. 门口的婆婆</h2><p>幼稚园的门口有一个头发花白的老婆婆，每天风雨无阻在那里摆着地摊卖一些快过期的垃圾食品。由于年纪大了，脑子有些糊涂，经常算不清楚自己挣了多少钱。有一天，她无意间听到了小明跟小伙伴们吹嘘自己如何在小红的帮助下与幼师斗智斗勇。于是，婆婆决定找到小红牌超级计算器来做自己的小帮手，并提供一包卫龙辣条作为报酬。小红经不住诱惑，答应了。<br>回看一下上一章的代码，我们发现小红牌超级计算器的add方法需要的参数是两个整型变量和一个Student对象，但是老婆婆她不是学生，是个小商贩啊，这里肯定要做修改。这种情况下，我们很自然的会想到继承和多态。如果让小明这个学生和老婆婆这个小商贩从一个父类进行继承，那么我们只需要给小红牌超级计算器传入一个父类的引用就可以啦。<br>不过，实际使用中，考虑到java的单继承，以及不希望把自身太多东西暴漏给别人，这里使用从接口继承的方式配合内部类来做。<br>换句话说，小红希望以后继续向班里的小朋友们提供计算服务，同时还能向老婆婆提供算账服务，甚至以后能够拓展其他人的业务，于是她向所有的顾客约定了一个办法，用于统一的处理，也就是自己需要的操作数和做完计算之后应该怎么做。这个统一的方法，小红做成了一个接口，提供给了大家，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">doJob</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillBlank</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> result)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因为灵感来自帮小明填空，因此小红保留了初心，把所有业务都当做填空（fillBlank）来做。<br>同时，小红修改了自己的计算器，使其可以同时处理不同的实现了doJob接口的人，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuperCalculator</span></span></div><div class="line">&#123;</div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, doJob  customer)</span></span></div><div class="line">     &#123;</div><div class="line">         <span class="keyword">int</span> result = a + b;</div><div class="line">         customer.fillBlank(a, b, result);</div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>小明和老婆婆拿到这个接口之后，只要实现了这个接口，就相当于按照统一的模式告诉小红得到结果之后的处理办法，按照之前说的使用内部类来做，代码如下：</p>
+<p>小明的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span></span></div><div class="line"> &#123;</div><div class="line">     <span class="keyword">private</span> String name = <span class="keyword">null</span>;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name)</span></span></div><div class="line">     &#123;</div><div class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">     &#125;</div><div class="line">   </div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">doHomeWork</span> <span class="keyword">implements</span> <span class="title">doJob</span></span></div><div class="line">    &#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillBlank</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> result)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">            System.out.println(name + <span class="string">"求助小红计算:"</span> + a + <span class="string">" + "</span> + b + <span class="string">" = "</span> + result);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">callHelp</span> <span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">new</span> SuperCalculator().add(a, b, <span class="keyword">new</span> doHomeWork());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>老婆婆的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Seller</span></span></div><div class="line"> &#123;</div><div class="line">     <span class="keyword">private</span> String name = <span class="keyword">null</span>;</div><div class="line"> </div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="title">Seller</span><span class="params">(String name)</span></span></div><div class="line">     &#123;</div><div class="line">         <span class="comment">// TODO Auto-generated constructor stub</span></div><div class="line">         <span class="keyword">this</span>.name = name;</div><div class="line">     &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">doHomeWork</span> <span class="keyword">implements</span> <span class="title">doJob</span></span></div><div class="line">    &#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillBlank</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> result)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">            System.out.println(name + <span class="string">"求助小红算账:"</span> + a + <span class="string">" + "</span> + b + <span class="string">" = "</span> + result + <span class="string">"元"</span>);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">callHelp</span> <span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">new</span> SuperCalculator().add(a, b, <span class="keyword">new</span> doHomeWork());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试程序如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line"> &#123;</div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">     &#123;</div><div class="line">         <span class="keyword">int</span> a = <span class="number">56</span>;</div><div class="line">         <span class="keyword">int</span> b = <span class="number">31</span>;</div><div class="line">         <span class="keyword">int</span> c = <span class="number">26497</span>;</div><div class="line">         <span class="keyword">int</span> d = <span class="number">11256</span>;</div><div class="line">         Student s1 = <span class="keyword">new</span> Student(<span class="string">"小明"</span>);</div><div class="line">        Seller s2 = <span class="keyword">new</span> Seller(<span class="string">"老婆婆"</span>);</div><div class="line">        </div><div class="line">        s1.callHelp(a, b);</div><div class="line">        s2.callHelp(c, d);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如下：<br>小明求助小红计算:56 + 31 = 87<br>老婆婆求助小红算账:26497 + 11256 = 37753元<br>最后的话<br>可以很明显的看到，小红已经把这件事情当做一个事业来做了，看她给接口命的名字doJob就知道了。<br>有人也许会问，为什么老婆婆摆摊能挣那么多钱？ 你的关注点有问题好吗！！这里聊的是回调机制啊！！<br>我只知道，后来小红的业务不断扩大，终于在幼稚园毕业之前，用挣到的钱买了人生的第一套房子。<br>完！！！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/01/Java Ant build.xml详解/" rel="next" title="Java Ant build.xml详解">
+                <i class="fa fa-chevron-left"></i> Java Ant build.xml详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/01/RPC、CORBA、WebService之区别[转]/" rel="prev" title="RPC、CORBA、WebService之区别[转]">
+                RPC、CORBA、WebService之区别[转] <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/log.jpg"
+               alt="Rayman.hung" />
+          <p class="site-author-name" itemprop="name">Rayman.hung</p>
+           
+              <p class="site-description motion-element" itemprop="description">技术分享、读书心得、亲子时刻</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">654</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">441</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hongyitong" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.sina.com.cn/yitonghong" target="_blank" title="忆桐之家">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  忆桐之家
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/2780741" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/rayman-36" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.liaoxuefeng.com/" target="_blank" title="廖雪峰的官方网站">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  廖雪峰的官方网站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.vaikan.com/" target="_blank" title="外刊IT评论">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  外刊IT评论
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.google.com/" title="Google" target="_blank">Google</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hupu.com/" title="Hupu" target="_blank">Hupu</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#序言"><span class="nav-number">1.</span> <span class="nav-text">序言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第1章-故事的缘起"><span class="nav-number">2.</span> <span class="nav-text">第1章. 故事的缘起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第2章-幼师的找茬"><span class="nav-number">3.</span> <span class="nav-text">第2章. 幼师的找茬</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-幼师回来了"><span class="nav-number">3.1.</span> <span class="nav-text">3. 幼师回来了</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第4章-门口的婆婆"><span class="nav-number">4.</span> <span class="nav-text">第4章. 门口的婆婆</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2007 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rayman.hung</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
