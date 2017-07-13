@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -144,7 +144,7 @@
 
 
 
-  <title>SOA、EAI异同 | 忆桐之家的博客</title>
+  <title>SOA、EAI异同 | 忆桐之家的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -169,7 +169,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -266,9 +266,43 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -394,7 +428,7 @@
 <h2 id="3-标准化"><a href="#3-标准化" class="headerlink" title="3). 标准化"></a>3). 标准化</h2><p>SOA在实现企业信息化集成的同时，也将实现企业级服务的高度可重用作为目标，因此，在SOA架构中任何一种接口、通讯、协议都是遵循相应的国际标准，如：标准描述语言（WSDL）、发现协议（UDDI)和消息协议(SOAP)等。<br>EAI则大多使用基于具体实施EAI企业中制定的私有标准。基于私有标准的优点是可以在一定程度上减轻EAI中间层对应用系统消息翻译转换的压力，在应用系统较少的情况下可以提高EAI的整体性能，但私有标准同时也对企业整合的灵活可扩展性上带来损失，当企业引入新的应用系统，或当某个应用系统需要做比较大的改动时，整个EAI总线的适应性将变得十分脆弱。<br>在系统较少的情况下或是系统集成的早期阶段，采用私有标准的EAI会体现出性能高，实现难度低等优点，但在企业规模不断增长的过程中，新引入系统的整合难度将因为标准的不统一而呈指数级上升。 </p>
 <h2 id="4-灵活可扩展性"><a href="#4-灵活可扩展性" class="headerlink" title="4). 灵活可扩展性"></a>4). 灵活可扩展性</h2><p>由于对标准的良好支持，使得SOA具有可灵活扩展的特性，而EAI要达到同样的扩展效果，其代价将远远高于SOA。例如，现在有甲、乙两个系统需要集成。假设它们通过SOA完成集成形成A方案，使用EAI完成集成形成B方案。当集成需求发生变化后，甲乙两个系统需要以另外一种业务逻辑进行集成。对于A方案而言，所需要做的工作比较简单，只需将之前的业务逻辑打开，重新组合一下业务逻辑就可以实现。而对于B方案而言，过程就会麻烦的多，需要根据新的业务逻辑，重新设计开发满足新业务逻辑需要的适配器和中间层的消息处理逻辑。 </p>
 <h2 id="5-重用性"><a href="#5-重用性" class="headerlink" title="5). 重用性"></a>5). 重用性</h2><p>企业信息化建设的投资可以分为两个部分：现有应用系统的维护与新系统的开发费用。在SOA架构下，各个服务是以完全独立的方式通过服务目录暴露在SOA集成平台上的，当新集成进来的应用系统需要使用现有的某个服务时，可以直接使用，无需再次开发，即服务是可重用的，只需用开发目前还没有的业务功能服务，这样可以充分利用现有的资源，降低成本。<br>通过EAI方式实现企业应用集成，其开发的适配器、中间层消息转换规则和消息路由都是紧耦合的，当新系统要在EAI中进行集成，便需要对现有的部分适配器、中间层消息转换规则与消息路由进行改造，无法重用。<br>因此，使用SOA比使用EAI更经济，尤其在多个应用系统相互集成的复杂场景下，SOA的优点将更加突出。</p>
-<h2 id="6-SOA企业服务总线与EAI总线的比较"><a href="#6-SOA企业服务总线与EAI总线的比较" class="headerlink" title="6). SOA企业服务总线与EAI总线的比较"></a>6). SOA企业服务总线与EAI总线的比较</h2><p>&nbsp;<font color="#FF0000" size="4px">ESB(Enterprise Service Bus企业服务总线）是一种用于推动SOA的基础设施，从技术上而言，企业服务总线是一种消息传递的主干线，它用于提供协议转换，消息格式的转换，地址路由，接收并分发从各个连接到ESB的服务请求与系统传递来的消息。 </font><br>在EAI的总线架构中，EAI为消息传播提供了一个中央消息主干线—Bus。应用程序使用适配器将消息发布到总线，消息通过总线流动到预订的应用程序中。总线是消息流动的通道，捆绑在应用软件端的适配器负责将消息在应用程序端的格式与符合总线标准的格式之间转换。因此，对于每一个应用程序，都需要单独为其开发符合应用程序自身要求的适配器，而由于没有遵循统一的标准，这些适配器是无法通用的。当某个应用系统进行比较大的改动时，则有可能存在对适配器的改造已经不能满足系统变更需求的情况，此时甚至有可能会牵涉到对BUS总线的修改，给企业信息架构带来很大的风险。<br>&nbsp;<font color="#4590a3" size="4px">从ESB和EAI的总线工作过程上的区别可以看出ESB承担了更多的责任，做了更多的事情，为集成后的系统提供了完善、坚固的底层支持。而EAI的总线，只是一个消息的分发器。</font>功能上的差别导致了系统集成到总线上的代价的巨大差异。 </p>
+<h2 id="6-SOA企业服务总线与EAI总线的比较"><a href="#6-SOA企业服务总线与EAI总线的比较" class="headerlink" title="6). SOA企业服务总线与EAI总线的比较"></a>6). SOA企业服务总线与EAI总线的比较</h2><p>&nbsp;<font color="#FF0000" size="4px">ESB(Enterprise Service Bus企业服务总线）是一种用于推动SOA的基础设施，从技术上而言，企业服务总线是一种消息传递的主干线，它用于提供协议转换，消息格式的转换，地址路由，接收并分发从各个连接到ESB的服务请求与系统传递来的消息。 </font><br>在EAI的总线架构中，EAI为消息传播提供了一个中央消息主干线—-Bus。应用程序使用适配器将消息发布到总线，消息通过总线流动到预订的应用程序中。总线是消息流动的通道，捆绑在应用软件端的适配器负责将消息在应用程序端的格式与符合总线标准的格式之间转换。因此，对于每一个应用程序，都需要单独为其开发符合应用程序自身要求的适配器，而由于没有遵循统一的标准，这些适配器是无法通用的。当某个应用系统进行比较大的改动时，则有可能存在对适配器的改造已经不能满足系统变更需求的情况，此时甚至有可能会牵涉到对BUS总线的修改，给企业信息架构带来很大的风险。<br>&nbsp;<font color="#4590a3" size="4px">从ESB和EAI的总线工作过程上的区别可以看出ESB承担了更多的责任，做了更多的事情，为集成后的系统提供了完善、坚固的底层支持。而EAI的总线，只是一个消息的分发器。</font>功能上的差别导致了系统集成到总线上的代价的巨大差异。 </p>
 <h2 id="7-系统集成的代价"><a href="#7-系统集成的代价" class="headerlink" title="7). 系统集成的代价"></a>7). 系统集成的代价</h2><p>SOA架构中的企业服务总线与EAI中私有形式BUS尽管结构较为相似，但是在系统集成中却导致集成的成本代价却有很大的差别。这种在代价上的差异主要由两个方面的因素造成的，一是私有形式的总线提供很多产品套件式的内建函数功能，这些函数功能需要根据业务需求进行开发；二是很多的私有形式的总线采用专有的消息格式来提高性能，但却增加了系统开发代价。企业服务总线都是基于标准的。企业服务总线主要的优点就是相比集线器架构和基于产品套件的总线架构的支出要低，而且它是完全基于业界标准化。<br>另一个关键的不同是：ESB具有分散的和分布式体系结构，更加轻型的安装，而EAI遵从HUB-SPOKE体系结构，因而企业中进行多个大型应用系统之间的集成时，硬件成本高，扩展性也会相对比较薄弱。. </p>
 <h1 id="5、-总结"><a href="#5、-总结" class="headerlink" title="5、 总结"></a>5、 总结</h1><p>到目前为止，传统的编程技术所形成的软件系统都是刚性的。也就是说，一旦开发完成并投入运行，就是固定不变的，不能在使用过程中进行调整和改变。在业务流程中，软件系统严格按照预先设定的目标，各功能模块按照确定的顺序执行。如果数据结构或者业务逻辑发生改变，就必须对所有相关的软件模块、数据源和消息逐个进行修改。就算是有了EAI中间件，这种情况也并没有得到根本性的改变。<br>今天，SOA改变了这种现状。<font color="#FF0000" size="4px">SOA采用服务请求(Service Request)的方式，使软件系统向“柔性化”迈进了一大步。与传统的软件系统不同，SOA只限定服务所需的信息并提出服务请求，但是不限定提供服务的模块。SOA架构替代EAI实现企业应用集成是必然的趋势，只有通过SOA架构来进行企业应用集成，才能使企业信息化快速、稳定发展。</font></p>
 
@@ -457,8 +491,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/26/工程成本与财务成本的区别/" rel="prev" title="工程成本与财务成本的区别">
-                工程成本与财务成本的区别 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/27/数据仓库与ODS的区别/" rel="prev" title="数据仓库与ODS的区别">
+                数据仓库与ODS的区别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -836,6 +870,340 @@
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

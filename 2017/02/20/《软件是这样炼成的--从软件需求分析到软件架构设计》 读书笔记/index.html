@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -173,7 +173,7 @@
 
 
 
-  <title>《软件是这样炼成的--从软件需求分析到软件架构设计》 读书笔记 | 忆桐之家的博客</title>
+  <title>《软件是这样炼成的--从软件需求分析到软件架构设计》 读书笔记 | 忆桐之家的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -198,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -295,9 +295,43 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -416,7 +450,7 @@
 </ul>
 <h1 id="二、需求分析"><a href="#二、需求分析" class="headerlink" title="二、需求分析"></a>二、需求分析</h1><p><img src="/img/需求分析总图.jpg" alt=""><br><img src="/img/用例事件流描述1.jpg" alt=""><br><img src="/img/用例图事件流图.jpg" alt=""><br><img src="/img/用例之间关系.jpg" alt=""><br><img src="/img/参与者关系分析.jpg" alt=""><br><img src="/img/用例图.jpg" alt=""><br><img src="/img/类初选.jpg" alt=""><br><img src="/img/类操作.jpg" alt=""><br><img src="/img/领域图.jpg" alt=""><br><img src="/img/领域图1.jpg" alt=""><br><img src="/img/领域类图确认表.jpg" alt=""><br><img src="/img/用例领域类数据集数据项关系.jpg" alt=""><br><img src="/img/命名规范.jpg" alt=""><br><img src="/img/易用性分析.jpg" alt=""></p>
 <ul>
-<li>需求分析：动态–用例，考虑人机交互；静态–领域分析，考虑用例操作的对象实体</li>
+<li>需求分析：动态—用例，考虑人机交互；静态—领域分析，考虑用例操作的对象实体</li>
 <li>需求告诉我们做什么，至于怎么做事由架构决定的。</li>
 <li>业务流程图作为系统分析需求功能和程序流程的基础，业务对象作为编写领域类图和数据字典的基础；客户调研报告中的组织结构作为子系统划分的依据；岗位职责描述部分作为系统中参与者的设计依据。</li>
 <li><strong>用例图，使得客户在大脑中形成了一个系统的运行蓝图，让客户明白能够在将来的系统中扮演的角色以及在这个角色中要承当的责任和客户将运行哪些行为动作完成自己的工作。</strong></li>
@@ -445,7 +479,7 @@
 <li>体系结构比分层设计更为高层一些。</li>
 <li>分层是表示将功能进行有序的分组。通过分层，可以限制之系统间的依赖关系，使系统可以更松散的方式耦合，从而更易于维护。</li>
 <li>层数越多，可以将每层分布在不同的机器上。</li>
-<li>蓝图– 概要设计；施工图–详细设计</li>
+<li>蓝图— 概要设计；施工图—详细设计</li>
 <li><strong>设计模式的核心原则是“开闭原则”，对扩展是开放的，对修改是关闭的。一个好的系统是在不修改源代码的情况下，可以扩展功能。实现开闭原则的关键就是抽象化，在开闭原则中，不允许修改的是抽象的类或接口，允许扩展的是具体的实现类，抽象类和接口在开闭原则中扮演着极其重要的角色。即要预知可能变化的需求，有预见所有可能已知的扩展。<br>针对接口编程，而不是针对实现编程。</strong></li>
 <li>一般狭义上的业务逻辑不包括数据持久化。</li>
 <li><strong>框架：就是半成品，开发人员做填空题。</strong></li>
@@ -466,7 +500,7 @@
 <li>冗余分析：<br>1、表冗余<br>2、记录冗余<br>3、属性冗余<br>4、属性值冗余</li>
 <li><strong>实体关系图（E-R图）编制一般分两步走，第一步只考虑实体以及他们之间的联系；第二步考虑给定实体的属性，不同时考虑两者是为了让设计工作变得单纯一点。</strong></li>
 <li>用建筑设计来比喻的话，实体关系图其实就是建筑材料的挑选过程，也就是说根据用户需求，我们决定需要哪些材料以及这些材料配比关系，争取做到一点都不浪费不冗余。在实体关系建模过程中，我们其实就是对领域类和数据集以及数据项的优化过程，并且确定了他们之间的关系。</li>
-<li>在逻辑设计阶段，需要考虑主键、外键、考虑是否为空、是否符合业务规则，数据库范式的分析。<br>1、创建表<br>   映射E-R实体为表、表关系描述、数据完整性（实体完整性–主键约束、参照完整性–外键、用户定义完整性–业务规则）<br>2、范式检查表结构<br>3、是否满足所有的业务<br>4、检查按业务规则</li>
+<li>在逻辑设计阶段，需要考虑主键、外键、考虑是否为空、是否符合业务规则，数据库范式的分析。<br>1、创建表<br>   映射E-R实体为表、表关系描述、数据完整性（实体完整性—主键约束、参照完整性—外键、用户定义完整性—业务规则）<br>2、范式检查表结构<br>3、是否满足所有的业务<br>4、检查按业务规则</li>
 <li><strong>派生数据的设计，在修改源数据的时候很容易导致不一致的情况出现；<br>提取表（统计表）：修改源数据的时候，需要考虑冲账的方式，把修改的差异体现在下一个统计周期中！</strong></li>
 <li><strong>存储过程出发点：少量输入参数、大量输出数据的情况下，减少数据库服务器为其它应用程序提供服务而带来的网络负荷，提高数据库操作性能。</strong></li>
 <li>数据库安全：<br>1、管理制度<br>2、数据授权<br>3、数据库技术：存储过程、视图、加密等。</li>
@@ -491,7 +525,7 @@
 <li>世界的本质其实和类相似，就是对象，对象本身的属性、动作；以及之间的相关关系。</li>
 <li><strong>软件设计思想：变与不变分离（可重用），分层思想（降低耦合），抽象（降低复杂度）</strong></li>
 <li><strong>面向对象的方法是以认识论为基础，用对象来理解和分析问题空间，并设计和开发出由对象构成的软件系统（解空间）的方法。由于问题空间和解空间都是由对象组成的，这样可以消除由于问题空间和解空间结构上的不一致带来的问题。</strong></li>
-<li>聋哑对话<br>老虎吃天 —- 无从下口</li>
+<li>聋哑对话<br>老虎吃天 —— 无从下口</li>
 <li><strong>继承的主要目的是为了抽象而不是重用和功能扩展</strong></li>
 </ul>
 <p><img src="/img/软件是这样炼成的上.png" alt=""></p>
@@ -553,8 +587,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/23/XP、SCRUM、CMM 、RUP 的比较/" rel="prev" title="XP、SCRUM、CMM 、RUP 的比较">
-                XP、SCRUM、CMM 、RUP 的比较 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/20/聚集索引与非聚集索引/" rel="prev" title="聚集索引与非聚集索引">
+                聚集索引与非聚集索引 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -932,6 +966,340 @@
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

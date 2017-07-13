@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -141,7 +141,7 @@
 
 
 
-  <title>关于密码的加密【转载】 | 忆桐之家的博客</title>
+  <title>关于密码的加密【转载】 | 忆桐之家的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -166,7 +166,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -263,9 +263,43 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -376,8 +410,12 @@
       
 
       
-        <h1 id="1、加盐"><a href="#1、加盐" class="headerlink" title="1、加盐"></a>1、加盐</h1><p><strong>生成一个随机数，我们称之为salt，然后在数据库中记录salt和h=hash(pwd + salt)，查询的时候，得到用户的口令p</strong>，然后从数据库中查出salt，计算hash(p+salt)，看是不是等于h，等于就是对的，不等于就是不对的。<br>单纯使用MD5之所以不好，并不是说MD5这种方法容易遭到破解，而事实上对于MD5求原象或者第二原象，也就是“逆计算”这种破解，没有什么很好的方法。只能通过预先计算知道许多MD5的对应关系，存在数据库中，然后使用的时候反查，例如我知道’password’的MD5值是5f4dcc3b5aa765d61d8327deb882cf99，那么我就用一个数据库存起来，只要我看到5f4dcc3b5aa765d61d8327deb882cf99，我就知道这个是口令’password‘使用MD5处理之后的值，原来的口令就是’password’。MD5在身份鉴别系统中用于口令保护已经是很久了事情了，<strong>大部分黑客也有针对这种Hash方式准备相应的数据库进行反查，这种数据库称为彩虹表</strong>。<a id="more"></a><br>所以，为了对抗彩虹表，我们要做的工作是避免预先计算，让攻击者无法（或者非常困难）提前计算好彩虹表。<br>为了反映为何彩虹表计算是可行的，我们再来算一下。我们假设用户可能输入的口令是键盘上的小写字母和数字，共26+10=36种，之所以这样假设是因为 一个用户比较多的系统中总是会有一些弱口令用户的，我们假设输入的口令至少5个字符，至多12个字符，那么用户可能的输入一共有：<br>$$<br>\sum_{i=5}^{12}{36^i} = 4873763662271935488 \approx 2^{64}<br>$$<br>而12个字节可能的组合应有<br>$$<br>2^{8 \times 12} = 2^{96}<br>$$<br>种。如果再考虑到用户为了方便记忆，输入的口令是一些已经存在的单词或是词组，可能的输入将会远远少于$$2^{64}$$。用户可能的输入少了，就给了我们枚举的空间。<br>为了阻止这种枚举，加salt的方法是扩大用户输入的一种简单有效的途径，随机生成一个16字节的随机数，加上用户本身输入的至多12个字符的口令，可能的输入就有$$2^{64} \times 2^{16 \times 8}=2^{160}$$种，这么多种可能性，任何一个机构和组织都没有办法存储规模如此庞大的彩虹表。</p>
-<h1 id="2、提高复杂度"><a href="#2、提高复杂度" class="headerlink" title="2、提高复杂度"></a>2、提高复杂度</h1><p>另外一种方法是通过提升Hash的复杂度，延长攻击者进行暴力破解时所消耗的时间。现在显卡用于并行计算实在太容易，6位纯数字的口令在显卡看来就是秒破。Hash算法的多次迭代就是最简单的延长计算时间的方法，Apache的htpasswd就使用了MD5的1000次迭代，不过只是使得这些口令稍微难破解一些。<br>另外，题中使用了SHA1和MD5两种算法的方法，除了稍微提升一点计算的难度以外，并没有多好，这种组合方法不能增加用户输入的可能性，另外虽然SHA1生成的是160位的Hash，但是由于输入是一个128位的MD5，所以输出也至多只可能有$$2^{128}$$种可能，猜测的范围也没有缩小。所以这是原来回答我建议你使用更多次数（如1000次）MD5迭代的原因，至少应当有一个方面有稍微大一些的加强。<br>另外此文（暴力密码破解器 ocl-Hashcat-plus 支持每秒猜测最多 80 亿个密码，意味着什么？）中有数据可以供参考，bcrypt是一种有效对抗口令Hash破解的算法，建议使用。</p>
+        <h1 id="1、加盐"><a href="#1、加盐" class="headerlink" title="1、加盐"></a>1、加盐</h1><p><strong>生成一个随机数，我们称之为salt，然后在数据库中记录salt和h=hash(pwd + salt)，查询的时候，得到用户的口令p</strong>，然后从数据库中查出salt，计算hash(p+salt)，看是不是等于h，等于就是对的，不等于就是不对的。<br>单纯使用MD5之所以不好，并不是说MD5这种方法容易遭到破解，而事实上对于MD5求原象或者第二原象，也就是“逆计算”这种破解，没有什么很好的方法。只能通过预先计算知道许多MD5的对应关系，存在数据库中，然后使用的时候反查，例如我知道’password’的MD5值是5f4dcc3b5aa765d61d8327deb882cf99，那么我就用一个数据库存起来，只要我看到5f4dcc3b5aa765d61d8327deb882cf99，我就知道这个是口令’password‘使用MD5处理之后的值，原来的口令就是’password’。MD5在身份鉴别系统中用于口令保护已经是很久了事情了，<strong>大部分黑客也有针对这种Hash方式准备相应的数据库进行反查，这种数据库称为彩虹表</strong>。<a id="more"></a><br>所以，为了对抗彩虹表，我们要做的工作是避免预先计算，让攻击者无法（或者非常困难）提前计算好彩虹表。<br>为了反映为何彩虹表计算是可行的，我们再来算一下。我们假设用户可能输入的口令是键盘上的小写字母和数字，共26+10=36种，之所以这样假设是因为 一个用户比较多的系统中总是会有一些弱口令用户的，我们假设输入的口令至少5个字符，至多12个字符，那么用户可能的输入一共有：</p>
+<script type="math/tex; mode=display">
+\sum_{i=5}^{12}{36^i} = 4873763662271935488 \approx 2^{64}</script><p>而12个字节可能的组合应有</p>
+<script type="math/tex; mode=display">
+2^{8 \times 12} = 2^{96}</script><p>种。如果再考虑到用户为了方便记忆，输入的口令是一些已经存在的单词或是词组，可能的输入将会远远少于<script type="math/tex">2^{64}</script>。用户可能的输入少了，就给了我们枚举的空间。<br>为了阻止这种枚举，加salt的方法是扩大用户输入的一种简单有效的途径，随机生成一个16字节的随机数，加上用户本身输入的至多12个字符的口令，可能的输入就有<script type="math/tex">2^{64} \times 2^{16 \times 8}=2^{160}</script>种，这么多种可能性，任何一个机构和组织都没有办法存储规模如此庞大的彩虹表。</p>
+<h1 id="2、提高复杂度"><a href="#2、提高复杂度" class="headerlink" title="2、提高复杂度"></a>2、提高复杂度</h1><p>另外一种方法是通过提升Hash的复杂度，延长攻击者进行暴力破解时所消耗的时间。现在显卡用于并行计算实在太容易，6位纯数字的口令在显卡看来就是秒破。Hash算法的多次迭代就是最简单的延长计算时间的方法，Apache的htpasswd就使用了MD5的1000次迭代，不过只是使得这些口令稍微难破解一些。<br>另外，题中使用了SHA1和MD5两种算法的方法，除了稍微提升一点计算的难度以外，并没有多好，这种组合方法不能增加用户输入的可能性，另外虽然SHA1生成的是160位的Hash，但是由于输入是一个128位的MD5，所以输出也至多只可能有<script type="math/tex">2^{128}</script>种可能，猜测的范围也没有缩小。所以这是原来回答我建议你使用更多次数（如1000次）MD5迭代的原因，至少应当有一个方面有稍微大一些的加强。<br>另外此文（暴力密码破解器 ocl-Hashcat-plus 支持每秒猜测最多 80 亿个密码，意味着什么？）中有数据可以供参考，bcrypt是一种有效对抗口令Hash破解的算法，建议使用。</p>
 
       
     </div>
@@ -426,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/10/理解Linux系统负荷[转]/" rel="next" title="理解Linux系统负荷[转]">
-                <i class="fa fa-chevron-left"></i> 理解Linux系统负荷[转]
+              <a href="/2017/01/10/缓存算法（页面置换算法）-FIFO、LFU、LRU/" rel="next" title="缓存算法（页面置换算法）-FIFO、LFU、LRU">
+                <i class="fa fa-chevron-left"></i> 缓存算法（页面置换算法）-FIFO、LFU、LRU
               </a>
             
           </div>
@@ -436,8 +474,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/10/云计算管理三大利器：Nagios、Ganglia和Splunk/" rel="prev" title="云计算监控平台：Nagios、Ganglia和Splunk">
-                云计算监控平台：Nagios、Ganglia和Splunk <i class="fa fa-chevron-right"></i>
+              <a href="/2017/01/10/沉没成本/" rel="prev" title="沉没成本(Sunk Cost)">
+                沉没成本(Sunk Cost) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -815,6 +853,340 @@
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
