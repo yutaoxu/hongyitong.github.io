@@ -97,17 +97,17 @@
 
 
 
-<meta name="description" content="三、多机搭建（更换电脑搭建）因为之前上传到百度网盘的MD源文件，下载之后的创建日期都变成下载那天的时间，导致之前很多没有定义date时间的都默认成下载的日期了。花了好长时间把MD文件的date属性都加上了发布的时间。主要的做法是，在新的机器上安装相关的软件，然后把备份的yml文件的内容copy过去，因为版本不同，不能直接覆盖文件，需要把里面的内容copy paste过去。另外，还需安装相关的插件等">
+<meta name="description" content="三、多机搭建（更换电脑搭建）其实简单说，就是四个部分：1、备份备份source文件夹（所有的MD文件都在这里）；备份站点的_config.yml，主题的的_config.yml;如果担心，可以把整个hexo目录备份下来；2、安装按照指引安装（其实可以安装第一次的安装来处理），只是涉及github 仓库那一部分是不需要了；3、恢复把source目录恢复覆盖；两个_config.yml的内容，比较，然">
 <meta name="keywords" content="互联网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搭建Github、Coding博客的技术资料">
 <meta property="og:url" content="http://hongyitong.github.io/2016/06/21/搭建Github、Coding博客的技术资料/index.html">
 <meta property="og:site_name" content="忆桐之家的博客">
-<meta property="og:description" content="三、多机搭建（更换电脑搭建）因为之前上传到百度网盘的MD源文件，下载之后的创建日期都变成下载那天的时间，导致之前很多没有定义date时间的都默认成下载的日期了。花了好长时间把MD文件的date属性都加上了发布的时间。主要的做法是，在新的机器上安装相关的软件，然后把备份的yml文件的内容copy过去，因为版本不同，不能直接覆盖文件，需要把里面的内容copy paste过去。另外，还需安装相关的插件等">
-<meta property="og:updated_time" content="2017-07-13T01:38:27.754Z">
+<meta property="og:description" content="三、多机搭建（更换电脑搭建）其实简单说，就是四个部分：1、备份备份source文件夹（所有的MD文件都在这里）；备份站点的_config.yml，主题的的_config.yml;如果担心，可以把整个hexo目录备份下来；2、安装按照指引安装（其实可以安装第一次的安装来处理），只是涉及github 仓库那一部分是不需要了；3、恢复把source目录恢复覆盖；两个_config.yml的内容，比较，然">
+<meta property="og:updated_time" content="2017-07-13T06:13:53.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建Github、Coding博客的技术资料">
-<meta name="twitter:description" content="三、多机搭建（更换电脑搭建）因为之前上传到百度网盘的MD源文件，下载之后的创建日期都变成下载那天的时间，导致之前很多没有定义date时间的都默认成下载的日期了。花了好长时间把MD文件的date属性都加上了发布的时间。主要的做法是，在新的机器上安装相关的软件，然后把备份的yml文件的内容copy过去，因为版本不同，不能直接覆盖文件，需要把里面的内容copy paste过去。另外，还需安装相关的插件等">
+<meta name="twitter:description" content="三、多机搭建（更换电脑搭建）其实简单说，就是四个部分：1、备份备份source文件夹（所有的MD文件都在这里）；备份站点的_config.yml，主题的的_config.yml;如果担心，可以把整个hexo目录备份下来；2、安装按照指引安装（其实可以安装第一次的安装来处理），只是涉及github 仓库那一部分是不需要了；3、恢复把source目录恢复覆盖；两个_config.yml的内容，比较，然">
 
 
 
@@ -410,7 +410,8 @@
       
 
       
-        <h1 id="三、多机搭建（更换电脑搭建）"><a href="#三、多机搭建（更换电脑搭建）" class="headerlink" title="三、多机搭建（更换电脑搭建）"></a>三、多机搭建（更换电脑搭建）</h1><p>因为之前上传到百度网盘的MD源文件，下载之后的创建日期都变成下载那天的时间，导致之前很多没有定义date时间的都默认成下载的日期了。<br>花了好长时间把MD文件的date属性都加上了发布的时间。<br>主要的做法是，在新的机器上安装相关的软件，然后把备份的yml文件的内容copy过去，因为版本不同，不能直接覆盖文件，需要把里面的内容copy paste过去。<br>另外，还需安装相关的插件等等。<br>具体的参照第一次搭建过程的资料。<br>多机部署参考：<br><a href="http://lowrank.science/Hexo-Migration/" target="_blank" rel="external">多机更新 Hexo 博客</a><br>上文中提到的:先在电脑中的某一位置建立好 your_name.github.io 文件夹，比如 D:\Blog\your_name.github.io；<br>因为之前习惯取了hexo的名字，其实 hexo目录就是这里所谓的 youre_name.githubo.io文件夹。</p>
+        <h1 id="三、多机搭建（更换电脑搭建）"><a href="#三、多机搭建（更换电脑搭建）" class="headerlink" title="三、多机搭建（更换电脑搭建）"></a>三、多机搭建（更换电脑搭建）</h1><p>其实简单说，就是四个部分：<br>1、备份<br>备份source文件夹（所有的MD文件都在这里）；备份站点的_config.yml，主题的的_config.yml;<br>如果担心，可以把整个hexo目录备份下来；<br>2、安装<br>按照指引安装（其实可以安装第一次的安装来处理），只是涉及github 仓库那一部分是不需要了；<br>3、恢复<br>把source目录恢复覆盖；<br>两个_config.yml的内容，比较，然后把需要的部分copy到新装的文件里面替换对应内容。<br>注意，这里不要用整个文件覆盖的模式，因为可能对应的软件的版本不一致了。<br>4、安装相关的插件<br>包括支持数据公式、置顶、搜索等等；</p>
+<p>因为之前上传到百度网盘的MD源文件，下载之后的创建日期都变成下载那天的时间，导致之前很多没有定义date时间的都默认成下载的日期了。<br>花了好长时间把MD文件的date属性都加上了发布的时间。<br>主要的做法是，在新的机器上安装相关的软件，然后把备份的yml文件的内容copy过去，因为版本不同，不能直接覆盖文件，需要把里面的内容copy paste过去。<br>另外，还需安装相关的插件等等。<br>具体的参照第一次搭建过程的资料。<br>多机部署参考：<br><a href="http://lowrank.science/Hexo-Migration/" target="_blank" rel="external">多机更新 Hexo 博客</a><br>上文中提到的:先在电脑中的某一位置建立好 your_name.github.io 文件夹，比如 D:\Blog\your_name.github.io；<br>因为之前习惯取了hexo的名字，其实 hexo目录就是这里所谓的 youre_name.githubo.io文件夹。</p>
 <h1 id="一、第一次搭建过程资料"><a href="#一、第一次搭建过程资料" class="headerlink" title="一、第一次搭建过程资料"></a>一、第一次搭建过程资料</h1><p>经过几天的努力，终于把个人的博客搭建得差不多了。个人的博客现在存在Github和Coding两个地方，地址分别是：<br><a href="http://hongyitong.github.io/">Github版</a> 　　　　　　　　　　　<br><a href="http://raymanhung.coding.me/" target="_blank" rel="external">Coding版</a>  &nbsp;&nbsp;&nbsp;&nbsp;<strong>!Coding版本因为有100M的空间限制，无法发布了！</strong><br>在搭建过程当中，参考了以下的文档，特此记录！<br><a href="http://sunwhut.com/2015/10/30/buildBlog/" target="_blank" rel="external">如何利用GitHub Pages和Hexo快速搭建个人博客</a>   &nbsp;&nbsp;&nbsp;&nbsp;<strong>（这个博客不知道什么原因，访问不了:(）</strong><br>参考一下以下几个吧：<br><a href="http://lowrank.science/Hexo-Github/" target="_blank" rel="external">知行合一 用 Hexo 搭建博客</a><br><a href="http://www.wuxubj.cn/2016/08/Hexo-nexT-build-personal-blog/" target="_blank" rel="external">Hexo+nexT主题搭建个人博客</a><br><a href="https://linghucong.js.org/2016/04/15/2016-04-15-hexo-github-pages-blog/" target="_blank" rel="external">手把手教你使用Hexo + Github Pages搭建个人独立博客</a></p>
 <p><a href="https://segmentfault.com/a/1190000004548638" target="_blank" rel="external">hexo同时托管到coding.net与github</a><br><a href="http://www.jianshu.com/p/2cbf3e2f6d57" target="_blank" rel="external">如何将Hexo Blog同时发布到GitHub跟Coding上</a><br><a href="http://fionat.github.io/2016/04/02/sitemap/" target="_blank" rel="external">｜Hexo优化｜如何向google提交sitemap（详细）</a></p>
 <blockquote>
