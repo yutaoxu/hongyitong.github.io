@@ -324,7 +324,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/07/31/JavaScript和Java Applet有什么区别/">
+    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/08/01/TCPIP http socket小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rayman.hung">
@@ -343,7 +343,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/31/JavaScript和Java Applet有什么区别/" itemprop="url">JavaScript和Java Applet有什么区别</a></h1>
+                <a class="post-title-link" href="/2016/08/01/TCPIP http socket小结/" itemprop="url">TCP/IP，http，socket小结</a></h1>
         
 
         <div class="post-meta">
@@ -355,8 +355,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-31T00:00:00+08:00">
-                2016-07-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-01T00:00:00+08:00">
+                2016-08-01
               </time>
             
 
@@ -413,10 +413,148 @@
 
       
         
-          <p>JavaScript 是一种描述性语言，它可以被嵌入 HTML 的文件之中。通过 JavaScript 可以做到响应用户的需求事件(如表单的输入)，这样当一位使用者输入一项信息时，它不需要通过网络传送到服务器端进行处理再传回来的过程，而可以直接在客户端进行事件的处理。你也可以想像成有一个可执行程序在你的客户端上执行一样(但这种执行程序是有限的，它对客户端电脑的控制力很差)!<br>
+          <p>thomescai <a href="http://blog.csdn.net/thomescai(转载请保留" target="_blank" rel="external">http://blog.csdn.net/thomescai(转载请保留</a>)<br>先看图：<br><img src="/img/TCPIP图.png" alt=""><br>TCP/IP是什么？<br>   <strong>TCP/IP是个协议组，可分为三个层次：网络层、传输层和应用层</strong>。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/31/JavaScript和Java Applet有什么区别/#more" rel="contents">
+            <a class="btn" href="/2016/08/01/TCPIP http socket小结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/08/01/System.exit(0)和System.exit(1)区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rayman.hung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/log.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="忆桐之家的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/01/System.exit(0)和System.exit(1)区别/" itemprop="url">System.exit(0)和System.exit(1)区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-01T00:00:00+08:00">
+                2016-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术相关/" itemprop="url" rel="index">
+                    <span itemprop="name">技术相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-解析"><a href="#1-解析" class="headerlink" title="1.解析"></a>1.解析</h2><p>查看java.lang.System的源代码，我们可以找到System.exit(status)这个方法的说明，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">   * Terminates the currently running Java Virtual Machine. The</div><div class="line">   * argument serves as a status code; by convention, a nonzero status</div><div class="line">   * code indicates abnormal termination.</div><div class="line">   * &lt;p&gt;</div><div class="line">   * This method calls the &lt;code&gt;exit&lt;/code&gt; method in class</div><div class="line">   * &lt;code&gt;Runtime&lt;/code&gt;. This method never returns normally.</div><div class="line">   * &lt;p&gt;</div><div class="line">   * The call &lt;code&gt;System.exit(n)&lt;/code&gt; is effectively equivalent to</div><div class="line">   * the call:</div><div class="line">   * &lt;blockquote&gt;&lt;pre&gt;</div><div class="line">   * Runtime.getRuntime().exit(n)</div><div class="line">   * &lt;/pre&gt;&lt;/blockquote&gt;</div><div class="line">   *</div><div class="line">   * @param      status   exit status.</div><div class="line">   * @throws  SecurityException</div><div class="line">   *        if a security manager exists and its &lt;code&gt;checkExit&lt;/code&gt;</div><div class="line">   *        method doesn&apos;t allow exit with the specified status.</div><div class="line">   * @see        java.lang.Runtime#exit(int)</div><div class="line">   */</div><div class="line">  public static void exit(int status) &#123;</div><div class="line">  Runtime.getRuntime().exit(status);</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/08/01/System.exit(0)和System.exit(1)区别/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -737,7 +875,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/07/28/Java线程同步：synchronized锁住的是代码还是对象[转] /">
+    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/07/31/JavaScript和Java Applet有什么区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rayman.hung">
@@ -756,7 +894,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/28/Java线程同步：synchronized锁住的是代码还是对象[转] /" itemprop="url">Java线程同步：synchronized锁住的是代码还是对象[转]</a></h1>
+                <a class="post-title-link" href="/2016/07/31/JavaScript和Java Applet有什么区别/" itemprop="url">JavaScript和Java Applet有什么区别</a></h1>
         
 
         <div class="post-meta">
@@ -768,8 +906,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-28T00:00:00+08:00">
-                2016-07-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-31T00:00:00+08:00">
+                2016-07-31
               </time>
             
 
@@ -826,10 +964,10 @@
 
       
         
-          <p>转载请注明出处：<a href="http://blog.csdn.net/xiao__gui/article/details/8188833" target="_blank" rel="external">http://blog.csdn.net/xiao__gui/article/details/8188833</a><br>Java线程同步：synchronized锁住的是代码还是对象<br>在Java中，synchronized关键字是用来控制线程同步的，就是在多线程的环境下，控制synchronized代码段不被多个线程同时执行。synchronized既可以加在一段代码上，也可以加在方法上。<br>关键是，不要认为给方法或者代码段加上synchronized就万事大吉，看下面一段代码：<br>
+          <p>JavaScript 是一种描述性语言，它可以被嵌入 HTML 的文件之中。通过 JavaScript 可以做到响应用户的需求事件(如表单的输入)，这样当一位使用者输入一项信息时，它不需要通过网络传送到服务器端进行处理再传回来的过程，而可以直接在客户端进行事件的处理。你也可以想像成有一个可执行程序在你的客户端上执行一样(但这种执行程序是有限的，它对客户端电脑的控制力很差)!<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/28/Java线程同步：synchronized锁住的是代码还是对象[转] /#more" rel="contents">
+            <a class="btn" href="/2016/07/31/JavaScript和Java Applet有什么区别/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -946,6 +1084,144 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/07/28/最精简的java 线程池与任务队列/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/07/28/Java线程同步：synchronized锁住的是代码还是对象[转] /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rayman.hung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/log.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="忆桐之家的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/28/Java线程同步：synchronized锁住的是代码还是对象[转] /" itemprop="url">Java线程同步：synchronized锁住的是代码还是对象[转]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-28T00:00:00+08:00">
+                2016-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术相关/" itemprop="url" rel="index">
+                    <span itemprop="name">技术相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>转载请注明出处：<a href="http://blog.csdn.net/xiao__gui/article/details/8188833" target="_blank" rel="external">http://blog.csdn.net/xiao__gui/article/details/8188833</a><br>Java线程同步：synchronized锁住的是代码还是对象<br>在Java中，synchronized关键字是用来控制线程同步的，就是在多线程的环境下，控制synchronized代码段不被多个线程同时执行。synchronized既可以加在一段代码上，也可以加在方法上。<br>关键是，不要认为给方法或者代码段加上synchronized就万事大吉，看下面一段代码：<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/28/Java线程同步：synchronized锁住的是代码还是对象[转] /#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1379,283 +1655,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/07/19/安全模式最佳实践/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rayman.hung">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/log.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="忆桐之家的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/19/安全模式最佳实践/" itemprop="url">《安全模式最佳实践》读后感</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-19T00:00:00+08:00">
-                2016-07-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书心得/" itemprop="url" rel="index">
-                    <span itemprop="name">读书心得</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>写得比较晦涩的一本书。<br>比较全面的介绍了安全方面的内容，强调安全的整体性。不过，说是最佳实践，更多是从设计的角度的最佳实践，而不是整体案例的最佳实践。里面举的案例零散，不成体系。<br>比较一般的一本书，比较大的收获就是，在看书的过程当中，一些常用的术语、技术上网进行了了解。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/19/安全模式最佳实践/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/07/18/CORBA服务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rayman.hung">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/log.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="忆桐之家的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/18/CORBA服务/" itemprop="url">CORBA服务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-18T00:00:00+08:00">
-                2016-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术相关/" itemprop="url" rel="index">
-                    <span itemprop="name">技术相关</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>CORBA（Common Object Request Broker Architecture,公共对象请求代理体系结构，通用对象请求代理体系结构）是由OMG组织制订的一种标准的面向对象应用程 序体系规范。或者说 CORBA体系结构是对象管理组织（OMG）为解决分布式处理环境(DCE)中，硬件和软件系统的互连而提出的一种解决方案；OMG组织是一个国际性的非盈利组织，其职责是为应用开发提供一个公共框架，制订工业指南和对象管理规范，加快对象技术的发展。<br>最重要的服务有三个：命名服务、事件服务、通知服务。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/66/">66</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/">67</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1701,7 +1705,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">659</span>
+                <span class="site-state-item-count">661</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1723,7 +1727,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">447</span>
+                <span class="site-state-item-count">450</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
