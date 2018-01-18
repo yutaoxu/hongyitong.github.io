@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="技术分享, 读书心得，亲子时刻" />
+  <meta name="keywords" content="数据分析,埋点," />
 
 
 
@@ -97,15 +97,17 @@
 
 
 
-<meta name="description" content="技术分享、读书心得、亲子时刻">
-<meta property="og:type" content="website">
-<meta property="og:title" content="忆桐之家的博客">
-<meta property="og:url" content="http://hongyitong.github.io/archives/2019/01/index.html">
+<meta name="description" content="做产品的同学在产品上线后经常离不开一个词，数据分析。那么要如何进行数据分析呢？不妨先问自己这么几个问题。1.你要分析什么问题？是找问题还是验证？2.关于这些问题你需要哪些数据？3.这些数据从哪里来？ 要怎么解决这些问题呢？答案是数据埋点。首先通过产品定位及目标来确定自己需要哪些数据，其次通过在产品各个流程环节中设置数据埋点，最后，当用户使用产品时，后台就能源源不断地接收到数据了。">
+<meta name="keywords" content="数据分析,埋点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析第一步--做好数据埋点">
+<meta property="og:url" content="http://hongyitong.github.io/2018/01/18/数据分析第一步--做好数据埋点/index.html">
 <meta property="og:site_name" content="忆桐之家的博客">
-<meta property="og:description" content="技术分享、读书心得、亲子时刻">
+<meta property="og:description" content="做产品的同学在产品上线后经常离不开一个词，数据分析。那么要如何进行数据分析呢？不妨先问自己这么几个问题。1.你要分析什么问题？是找问题还是验证？2.关于这些问题你需要哪些数据？3.这些数据从哪里来？ 要怎么解决这些问题呢？答案是数据埋点。首先通过产品定位及目标来确定自己需要哪些数据，其次通过在产品各个流程环节中设置数据埋点，最后，当用户使用产品时，后台就能源源不断地接收到数据了。">
+<meta property="og:updated_time" content="2018-01-18T03:01:26.201Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="忆桐之家的博客">
-<meta name="twitter:description" content="技术分享、读书心得、亲子时刻">
+<meta name="twitter:title" content="数据分析第一步--做好数据埋点">
+<meta name="twitter:description" content="做产品的同学在产品上线后经常离不开一个词，数据分析。那么要如何进行数据分析呢？不妨先问自己这么几个问题。1.你要分析什么问题？是找问题还是验证？2.关于这些问题你需要哪些数据？3.这些数据从哪里来？ 要怎么解决这些问题呢？答案是数据埋点。首先通过产品定位及目标来确定自己需要哪些数据，其次通过在产品各个流程环节中设置数据埋点，最后，当用户使用产品时，后台就能源源不断地接收到数据了。">
 
 
 
@@ -133,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://hongyitong.github.io/archives/2019/01/"/>
+  <link rel="canonical" href="http://hongyitong.github.io/2018/01/18/数据分析第一步--做好数据埋点/"/>
 
 
 
 
 
-  <title>归档 | 忆桐之家的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>数据分析第一步--做好数据埋点 | 忆桐之家的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -164,7 +166,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left  page-archive  ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -312,65 +314,185 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-       
-        
-      太棒了! 目前共计 748 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2018/01/18/数据分析第一步--做好数据埋点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rayman.hung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/log.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="忆桐之家的博客">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据分析第一步--做好数据埋点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-18T00:00:00+08:00">
+                2018-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术相关/" itemprop="url" rel="index">
+                    <span itemprop="name">技术相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <p>做产品的同学在产品上线后经常离不开一个词，数据分析。那么要如何进行数据分析呢？不妨先问自己这么几个问题。<br>1.你要分析什么问题？是找问题还是验证？<br>2.关于这些问题你需要哪些数据？<br>3.这些数据从哪里来？</p>
+<p>要怎么解决这些问题呢？答案是数据埋点。首先通过产品定位及目标来确定自己需要哪些数据，其次通过在产品各个流程环节中设置数据埋点，最后，当用户使用产品时，后台就能源源不断地接收到数据了。<br><a id="more"></a><br>那么，问题又来了。如何做好数据分析的第一步，数据埋点呢？还是从三个问题来回答</p>
+<h1 id="1-数据埋点是什么？"><a href="#1-数据埋点是什么？" class="headerlink" title="1.数据埋点是什么？"></a>1.数据埋点是什么？</h1><p>初级的数据埋点：在产品流程关键部位植相关统计代码，用来追踪每次用户的行为，统计关键流程的使用程度。<br>中级的数据埋点：在产品中植入多段代码追踪用户连续行为，建立用户模型来具体化用户在使用产品中的操作行为。<br>高级的数据埋点：与研发及数据分析师团队合作，通过数据埋点还原出用户画像及用户行为，建立数据分析后台，通过数据分析、优化产品。</p>
+<h1 id="2-为什么要做数据埋点？"><a href="#2-为什么要做数据埋点？" class="headerlink" title="2.为什么要做数据埋点？"></a>2.为什么要做数据埋点？</h1><p>一个简单的逻辑：你不做数据埋点，你就做不了数据分析。你不做数据分析，你就会不知道产品上线情况。你不知道产品上线情况，你产品就会做差。你产品做差，你的业绩就会不好。你业绩不好你就会被辞，你被辞就会没钱。你没钱就会去睡马路。你睡马路你就可能会被车撞，你被车撞就会…<br>所以为了不被车撞，一定要做好数据埋点！</p>
+<h1 id="3-怎么做好数据埋点？"><a href="#3-怎么做好数据埋点？" class="headerlink" title="3.怎么做好数据埋点？"></a>3.怎么做好数据埋点？</h1><h2 id="（1）-数据埋点的内容"><a href="#（1）-数据埋点的内容" class="headerlink" title="（1） 数据埋点的内容"></a>（1） 数据埋点的内容</h2><p>数据埋点可以分为产品内部埋点和市场埋点，内部埋点通常分析用户使用产品的行为及流程，提升用户体验。市场埋点分析该产品在市场上的表现及用户使用场景，如产品在不同市场和地域的下载量，不同地域人群使用时间等等。</p>
+<p>产品流程通常分为主干流程和分支流程，所以相应的数据埋点可以分为主干埋点和分支埋点，数据埋点通常不会一步搞定，在产品的第一次上线时通常会埋以下几个点：PC&amp;Web端会统计产品的PV/UV，注册量，主要流程页面之间的转化率、日活人数等等。而移动端还要统计产品在Appstore，各大安卓市场的下载量。</p>
+<p>第二次埋点会根据产品目标及上线后的问题进行分析。比如，当你发现产品首页的UV很高， 注册量却非常低，你就需要分析出用户在首页的行为，如30%的用户退出了产品，60%的用户进入了注册页，但只有1%的用户注册了该产品。这也就意味着，注册流程可能出现了问题，需要进一步细化注册各个流程，增加数据埋点，分析各个流程之间的转化率，找到产品出现的问题并解决。</p>
+<p>具体到自己的产品，怎么数据埋点，就需要根据自己产品的任务流及产品目标来设计。这是一个由粗到细，优化迭代的过程。</p>
+<h2 id="（2）分析方法"><a href="#（2）分析方法" class="headerlink" title="（2）分析方法"></a>（2）分析方法</h2><p>任务流程分析法：根据产品设计的任务流，在任务流开始和结束处埋点，分析用户处理任务的情况。<br>页面转化分析法：统计相关页面的转化率及页面元素点击率，分析用户行为。<br>情景分析法：列出各种用户使用场景，自己或多人体验不同场景下产品的使用流程，寻找依据设立数据埋点，通过数据反馈验证用户行为。</p>
+<h2 id="（3）数据埋点的方式"><a href="#（3）数据埋点的方式" class="headerlink" title="（3）数据埋点的方式"></a>（3）数据埋点的方式</h2><p>目前主流的数据埋点方式分为两种：<br>第一种：自己公司研发在产品中注入代码统计，并搭建起相应的后台查询。<br>第二种：第三方统计工具，如友盟、百度移动、魔方、App Annie、talking data等。<br>最后，还是要说，数据埋点是产品数据分析的基础，也是个循序渐进的过程。基础的数据分析并不难，让数据来驱动产品迭代。</p>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2019">2019</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据分析/" rel="tag"># 数据分析</a>
+          
+            <a href="/tags/埋点/" rel="tag"># 埋点</a>
+          
         </div>
       
+
+      
+      
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/18/雪崩/" rel="next" title="雪崩">
+                <i class="fa fa-chevron-left"></i> 雪崩
+              </a>
+            
+          </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          <span class="post-nav-divider"></span>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/09/《目标》读书心得/" itemprop="url">
-              
-                <span itemprop="name">《目标》读书心得</span>
-              
-            </a>
-        
-      </h2>
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/19/《企业IT架构转型之道----阿里巴巴中台战略思想与架构实战》读书心得/" rel="prev" title="《企业IT架构转型之道----阿里巴巴中台战略思想与架构实战》读书心得">
+                《企业IT架构转型之道----阿里巴巴中台战略思想与架构实战》读书心得 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-01-09T00:00:00+08:00"
-              content="2019-01-09" >
-          01-09
-        </time>
-      </div>
-
-    </header>
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -378,6 +500,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -398,8 +524,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/img/log.jpg"
@@ -414,7 +549,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">748</span>
+                <span class="site-state-item-count">755</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -436,7 +571,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">644</span>
+                <span class="site-state-item-count">659</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -542,6 +677,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-数据埋点是什么？"><span class="nav-number">1.</span> <span class="nav-text">1.数据埋点是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-为什么要做数据埋点？"><span class="nav-number">2.</span> <span class="nav-text">2.为什么要做数据埋点？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-怎么做好数据埋点？"><span class="nav-number">3.</span> <span class="nav-text">3.怎么做好数据埋点？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）-数据埋点的内容"><span class="nav-number">3.1.</span> <span class="nav-text">（1） 数据埋点的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）分析方法"><span class="nav-number">3.2.</span> <span class="nav-text">（2）分析方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（3）数据埋点的方式"><span class="nav-number">3.3.</span> <span class="nav-text">（3）数据埋点的方式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -662,11 +813,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
@@ -1020,39 +1169,7 @@
         onPopupClose();
       }
     });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -1066,10 +1183,22 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
   
 
 
