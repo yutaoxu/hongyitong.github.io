@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://hongyitong.github.io/img/SOA6.jpg">
 <meta property="og:image" content="http://hongyitong.github.io/img/SOA7.png">
 <meta property="og:image" content="http://hongyitong.github.io/img/SOA8.png">
-<meta property="og:updated_time" content="2018-03-19T02:38:42.862Z">
+<meta property="og:updated_time" content="2018-03-26T09:22:17.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="透析SOA、RPC、SOAP、REST、ICE、ESB模型发展史">
 <meta name="twitter:description" content="现阶段大型集团企业都是怎么整合各种内部业务系统，选择何种架构，何种设计模式，在这里把涉及的概念阐述下  最初的程序全是单机程序，没有网络，没有RPC，更没有RESTful。程序猿写的东西孤独运行在单机上。那时的程序猿们语言相通，参与开发同一套系统的团队可以面对面沟通。网络出现了。网络，也带来变乱。网络是不同系统之间的通信，无论是早期网络，还是web，如何实行系统间的互联互通是个头痛的问题。而SO">
@@ -461,7 +461,7 @@
 <p>在服务器端，应用程序状态和功能可以分为各种资源。资源是一个有趣的概念实体，它向客户端公开。资源的例子有：应用程序对象、数据库记录、算法等等。每个资源都使用 URI (Universal Resource Identifier) 得到一个惟一的地址。所有资源都共享统一的界面，以便在客户端和服务器之间传输状态。使用的是标准的 HTTP 方法，比如 GET、PUT、POST 和 DELETE。Hypermedia 是应用程序状态的引擎，资源表示通过超链接互联。</p>
 <p>另一个重要的 REST 原则是分层系统，这表示组件无法了解它与之交互的中间层以外的组件。通过将系统知识限制在单个层，可以限制整个系统的复杂性，促进了底层的独立性。<br>当 REST 架构的约束条件作为一个整体应用时，将生成一个可以扩展到大量客户端的应用程序。它还降低了客户端和服务器之间的交互延迟。统一界面简化了整个系统架构，改进了子系统之间交互的可见性。REST 简化了客户端和服务器的实现。<br>在 RPC 样式的架构中，关注点在于方法，而在 REST 样式的架构中，关注点在于资源 —— 将使用标准方法检索并操作信息片段（使用表示的形式）。资源表示形式在表示形式中使用超链接互联。</p>
 <h4 id="RESTful-API-设计指南"><a href="#RESTful-API-设计指南" class="headerlink" title="RESTful API 设计指南"></a>RESTful API 设计指南</h4><p>参考阮老师的博客吧：<a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a><br>觉得这个没有什么好说的！</p>
-<h1 id="RPC、SOAP、REST的区别"><a href="#RPC、SOAP、REST的区别" class="headerlink" title="RPC、SOAP、REST的区别"></a>RPC、SOAP、REST的区别</h1><p>REST这种设计风格，它的很多思维方式与RPC是完全冲突的。<br>RPC的思想是把本地函数映射到API，也就是说一个API对应的是一个function，我本地有一个getAllUsers，远程也能通过某种约定的协议来调用这个getAllUsers。至于这个协议是Socket、是HTTP还是别的什么并不重要； RPC中的主体都是动作，是个动词，表示我要做什么。<br>而REST则不然，它的URL主体是资源，是个名词。而且也仅支持HTTP协议，规定了使用HTTP Method表达本次要做的动作，类型一般也不超过那四五种。这些动作表达了对资源仅有的几种转化方式。 这种设计思路是反程序员直觉的，因为在本地业务代码中仍然是一个个的函数，是动作，但表现在接口形式上则完全是资源的形式。 就像面向对象的「万物皆对象」理论在习惯了纯粹面向过程开发的程序员眼里显得十分别扭一样：我的代码本来就是按顺序、循环、分支这么运行的啊，为啥非得在很明确的结构上封装一层一层的基类子类接口，还要故意给两个函数起同一个名字，调用时才选择用哪一个呢？ 使用「万物皆资源」的思想编写实际项目中的API接口时，最常见的问题就是「这玩意到底是个什么资源？………………算了，我就直接写吧，不管什么风格了」 比如，login和logout应该怎么REST化？ 比如，多条件复合搜索在GET里写不下怎么办？ 比如，大量资源的删除难道要写几千个DELETE？  其实在理解了REST后，这些都不是什么无解的难题，只是思维方式要转换一下： login和logout其实只是对session资源的创建和删除； search本身就是个资源，使用POST创建，如果不需持久化，可以直接在Response中返回结果，如果需要（如翻页、长期缓存等），直接保存搜索结果并303跳转到资源地址就行了； id多到连url都写不下的请求，应该创建task，用GET返回task状态甚至执行进度； ……等等等。 </p>
+<h1 id="RPC、SOAP、REST的区别"><a href="#RPC、SOAP、REST的区别" class="headerlink" title="RPC、SOAP、REST的区别"></a>RPC、SOAP、REST的区别</h1><p>REST这种设计风格，它的很多思维方式与RPC是完全冲突的。<br>RPC的思想是把本地函数映射到API，也就是说一个API对应的是一个function，我本地有一个getAllUsers，远程也能通过某种约定的协议来调用这个getAllUsers。至于这个协议是Socket、是HTTP还是别的什么并不重要； RPC中的主体都是动作，是个动词，表示我要做什么。<br>而REST则不然，它的URL主体是资源，是个名词。而且也仅支持HTTP协议，规定了使用HTTP Method表达本次要做的动作，类型一般也不超过那四五种。这些动作表达了对资源仅有的几种转化方式。 这种设计思路是反程序员直觉的，因为在本地业务代码中仍然是一个个的函数，是动作，但表现在接口形式上则完全是资源的形式。 就像面向对象的「万物皆对象」理论在习惯了纯粹面向过程开发的程序员眼里显得十分别扭一样：我的代码本来就是按顺序、循环、分支这么运行的啊，为啥非得在很明确的结构上封装一层一层的基类子类接口，还要故意给两个函数起同一个名字，调用时才选择用哪一个呢？ 使用「万物皆资源」的思想编写实际项目中的API接口时，最常见的问题就是「这玩意到底是个什么资源？………………算了，我就直接写吧，不管什么风格了」 比如，login和logout应该怎么REST化？ 比如，多条件复合搜索在GET里写不下怎么办？ 比如，大量资源的删除难道要写几千个DELETE？  其实在理解了REST后，这些都不是什么无解的难题，只是思维方式要转换一下： login和logout其实只是对session资源的创建和删除； search本身就是个资源，使用POST创建，如果不需持久化，可以直接在Response中返回结果，如果需要（如翻页、长期缓存等），直接保存搜索结果并303跳转到资源地址就行了； id多到连url都写不下的请求，应该创建task，用GET返回task状态甚至执行进度； ……等等等。 </p>
 <p>如果你想只记住一点,那么就请记住 RPC是以动词为中心的, REST是以名词为中心的, 此处的 动词指的是一些方法, 名词是指资源.</p>
 <p>你会发现,以动词为中心,意味着,当你要需要加入新功能时,你必须要添加更多的动词, 这时候服务器端需要实现 相应的动词(方法), 客户端需要知道这个新的动词并进行调用.</p>
 <p>而以名词为中心, 假使我请求的是 hostname/friends/, 无论这个URI对应的服务怎么变化,客户端是无需 关注和更新的,而这种变化对客户端也是透明的.</p>
@@ -488,7 +488,7 @@
 <ul>
 <li>.NET是微软产品，只面向WINDOWS系统，而实际的情况是在当前的网络环境下，不同的计算机会运行不同的系统，如LINUX上面就不可能使用.NET；</li>
 <li>CORBA虽然在统一标准方面做了很多的工作，但是不同的供应商实现之间还是缺乏互操作性，并且目前还没有一家供应商可以针对所有的异种环境提供所有的实现支持，且CORBA的实现比较复杂，学习及实施的成本都会比较高；</li>
-<li>WebService最要命的缺点就是他的性能问题，对于要求比较高的行业是很少会考虑 webService的。</li>
+<li>WebService最要命的缺点就是他的性能问题，对于要求比较高的行业是很少会考虑webService的。</li>
 </ul>
 <p>ICE的产生就是源于.NET、CORBA及WEB SERVICE这些中间件的不足，它可以支持不同的系统，如WINDOWS、LINUX等，也可以支持在多种开发语言上使用，如C++、C、JAVA、RUBY、PYTHON、VB等，服务端可以是上面提到的任何一种语言实现的，客户端也可以根据自己的实际情况选择不同的语言实现，如服务端采用C语言实现，而客户端采用JAVA语言实现，底层的通讯逻辑通过ICE的封装实现，我们只需要关注业务逻辑。</p>
 <h1 id="ESB"><a href="#ESB" class="headerlink" title="ESB"></a>ESB</h1><p>企业服务总线（Enterprise Service Bus，ESB）的概念是从面向服务体系架构(Service Oriented Architecture， SOA)发展而来的。SOA描述了一种IT基础设施的应用集成模型；其中的软构件集是以一种定义清晰的层次化结构相互耦合。<strong>一个ESB是一个预先组装的SOA实现，它包含了实现SOA分层目标所必需的基础功能部件。</strong><br>在企业计算领域，<strong>企业服务总线是指由中间件基础设施产品技术实现的、 通过事件驱动和基于XML消息引擎，为更复杂的面向服务的架构提供的软件架构的构造物。企业服务总线通常在企业消息系统上提供一个抽象层，使得集成架构师能够不用编码而是利用消息的价值完成集成工作。</strong><br>企业服务总线提供可靠消息传输，服务接入，协议转换，数据格式转换，基于内容的路由等功能，屏蔽了服务的物理位置，协议和数据格式。</p>
@@ -543,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/14/《自控力》读书心得/" rel="next" title="《自控力》读书心得">
-                <i class="fa fa-chevron-left"></i> 《自控力》读书心得
+              <a href="/2018/03/16/服务器漂移/" rel="next" title="服务器漂移">
+                <i class="fa fa-chevron-left"></i> 服务器漂移
               </a>
             
           </div>
@@ -553,8 +553,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/16/访问控制/" rel="prev" title="访问控制">
-                访问控制 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/17/无状态服务（stateless service）/" rel="prev" title="无状态服务（stateless service）">
+                无状态服务（stateless service） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
