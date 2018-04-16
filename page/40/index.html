@@ -324,7 +324,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/08/01/System.exit(0)和System.exit(1)区别/">
+    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/08/01/JavaScript框架jQuery简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rayman.hung">
@@ -343,7 +343,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/08/01/System.exit(0)和System.exit(1)区别/" itemprop="url">System.exit(0)和System.exit(1)区别</a></h1>
+                <a class="post-title-link" href="/2016/08/01/JavaScript框架jQuery简介/" itemprop="url">JavaScript框架jQuery简介</a></h1>
         
 
         <div class="post-meta">
@@ -413,10 +413,10 @@
 
       
         
-          <h2 id="1-解析"><a href="#1-解析" class="headerlink" title="1.解析"></a>1.解析</h2><p>查看java.lang.System的源代码，我们可以找到System.exit(status)这个方法的说明，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">   * Terminates the currently running Java Virtual Machine. The</div><div class="line">   * argument serves as a status code; by convention, a nonzero status</div><div class="line">   * code indicates abnormal termination.</div><div class="line">   * &lt;p&gt;</div><div class="line">   * This method calls the &lt;code&gt;exit&lt;/code&gt; method in class</div><div class="line">   * &lt;code&gt;Runtime&lt;/code&gt;. This method never returns normally.</div><div class="line">   * &lt;p&gt;</div><div class="line">   * The call &lt;code&gt;System.exit(n)&lt;/code&gt; is effectively equivalent to</div><div class="line">   * the call:</div><div class="line">   * &lt;blockquote&gt;&lt;pre&gt;</div><div class="line">   * Runtime.getRuntime().exit(n)</div><div class="line">   * &lt;/pre&gt;&lt;/blockquote&gt;</div><div class="line">   *</div><div class="line">   * @param      status   exit status.</div><div class="line">   * @throws  SecurityException</div><div class="line">   *        if a security manager exists and its &lt;code&gt;checkExit&lt;/code&gt;</div><div class="line">   *        method doesn&apos;t allow exit with the specified status.</div><div class="line">   * @see        java.lang.Runtime#exit(int)</div><div class="line">   */</div><div class="line">  public static void exit(int status) &#123;</div><div class="line">  Runtime.getRuntime().exit(status);</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+          <p>jQuery项目是由John Resig在5年前创建的，最初的想法是实现跨浏览器的DOM遍历和操纵。目前的jQuery 1.4.2中包含了越来越多的工具以简化JavaScript的开发工作。根据BuiltWith的使用统计，开源项目jQuery在世界前10,000名站点中的使用率超过了30%。<br>jQuery API的设计初衷就是简单与直观，可以实现如下功能：<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/08/01/System.exit(0)和System.exit(1)区别/#more" rel="contents">
+            <a class="btn" href="/2016/08/01/JavaScript框架jQuery简介/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -555,6 +555,144 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/08/01/TCPIP http socket小结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/08/01/System.exit(0)和System.exit(1)区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rayman.hung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/log.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="忆桐之家的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/01/System.exit(0)和System.exit(1)区别/" itemprop="url">System.exit(0)和System.exit(1)区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-01T00:00:00+08:00">
+                2016-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术相关/" itemprop="url" rel="index">
+                    <span itemprop="name">技术相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-解析"><a href="#1-解析" class="headerlink" title="1.解析"></a>1.解析</h2><p>查看java.lang.System的源代码，我们可以找到System.exit(status)这个方法的说明，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">   * Terminates the currently running Java Virtual Machine. The</div><div class="line">   * argument serves as a status code; by convention, a nonzero status</div><div class="line">   * code indicates abnormal termination.</div><div class="line">   * &lt;p&gt;</div><div class="line">   * This method calls the &lt;code&gt;exit&lt;/code&gt; method in class</div><div class="line">   * &lt;code&gt;Runtime&lt;/code&gt;. This method never returns normally.</div><div class="line">   * &lt;p&gt;</div><div class="line">   * The call &lt;code&gt;System.exit(n)&lt;/code&gt; is effectively equivalent to</div><div class="line">   * the call:</div><div class="line">   * &lt;blockquote&gt;&lt;pre&gt;</div><div class="line">   * Runtime.getRuntime().exit(n)</div><div class="line">   * &lt;/pre&gt;&lt;/blockquote&gt;</div><div class="line">   *</div><div class="line">   * @param      status   exit status.</div><div class="line">   * @throws  SecurityException</div><div class="line">   *        if a security manager exists and its &lt;code&gt;checkExit&lt;/code&gt;</div><div class="line">   *        method doesn&apos;t allow exit with the specified status.</div><div class="line">   * @see        java.lang.Runtime#exit(int)</div><div class="line">   */</div><div class="line">  public static void exit(int status) &#123;</div><div class="line">  Runtime.getRuntime().exit(status);</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/08/01/System.exit(0)和System.exit(1)区别/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1517,149 +1655,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://hongyitong.github.io/2016/07/19/云计算的三种服务模式：IaaS，PaaS和SaaS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rayman.hung">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/log.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="忆桐之家的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/19/云计算的三种服务模式：IaaS，PaaS和SaaS/" itemprop="url">云计算的三种服务模式：IaaS，PaaS和SaaS</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-19T00:00:00+08:00">
-                2016-07-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术相关/" itemprop="url" rel="index">
-                    <span itemprop="name">技术相关</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="云计算的三种服务模式：IaaS，PaaS和SaaS"><a href="#云计算的三种服务模式：IaaS，PaaS和SaaS" class="headerlink" title="云计算的三种服务模式：IaaS，PaaS和SaaS"></a>云计算的三种服务模式：IaaS，PaaS和SaaS</h1><p>　　云服务”现在已经快成了一个家喻户晓的词了。如果你不知道PaaS, IaaS 和SaaS的区别，那么也没啥，因为很多人确实不知道。<br>　　“云”其实是互联网的一个隐喻，“云计算”其实就是使用互联网来接入存储或者运行在远程服务器端的应用，数据，或者服务。<br>　　任何一个使用基于互联网的方法来计算，存储和开发的公司，都可以从技术上叫做从事云的公司。然而，不是所有的云公司都一样。不是所有人都是CTO，所以有时候看到云技术背后的一些词可能会比较头疼。<br>云也是分层的</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/19/云计算的三种服务模式：IaaS，PaaS和SaaS/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/39/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><span class="page-number current">40</span><a class="page-number" href="/page/41/">41</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/41/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/39/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><span class="page-number current">40</span><a class="page-number" href="/page/41/">41</a><span class="space">&hellip;</span><a class="page-number" href="/page/81/">81</a><a class="extend next" rel="next" href="/page/41/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1705,7 +1705,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">800</span>
+                <span class="site-state-item-count">801</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1727,7 +1727,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">766</span>
+                <span class="site-state-item-count">769</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
